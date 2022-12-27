@@ -7,12 +7,15 @@ namespace Battleships.Model
 {
     public class PlayBoardModel
     {
-        public PlayBoardModel(Collection<Collection<TileStatus>> tiles)
-        {
-            this.Tiles = tiles;
-        }
-
         public Collection<Collection<TileStatus>> Tiles { get; set; }
+
+        public Collection<ShipModel> Ships { get; set; }
+
+        public PlayBoardModel(Collection<Collection<TileStatus>> tiles, Collection<ShipModel> ships)
+        {
+            Tiles = tiles;
+            Ships = ships;
+        }
 
         public TileStatus GetTile(int rowIndex, int colIndex)
         {
