@@ -7,16 +7,9 @@ namespace Battleships.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private IPageViewModel _currentPageViewModel;
-        public IPageViewModel CurrentPageViewModel
+        public IPageViewModel CurrentPage
         {
-            get { return _currentPageViewModel; }
-            set { _currentPageViewModel = value; }
-        }
-
-        public AppWindowViewModel()
-        {
-            CurrentPageViewModel = NavigationModule.Instance.CurrentPageViewModel;
+            get { return NavigationModule.Instance.CurrentViewModel; }
         }
     }
 }

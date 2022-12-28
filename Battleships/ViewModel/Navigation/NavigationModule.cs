@@ -20,11 +20,11 @@ namespace Battleships.ViewModel.Navigation
             }
         }
 
-        private IPageViewModel _currentPageViewModel;
-        public IPageViewModel CurrentPageViewModel
+        private IPageViewModel _currentViewModel;
+        public IPageViewModel CurrentViewModel
         {
-            get { return _currentPageViewModel; }
-            set { _currentPageViewModel = value; }
+            get { return _currentViewModel; }
+            set { _currentViewModel = value; }
         }
 
         private Collection<IPageViewModel> _pageViewModels;
@@ -42,7 +42,7 @@ namespace Battleships.ViewModel.Navigation
                 new MainPageViewModel()
             };
 
-            CurrentPageViewModel = PageViewModels[0];
+            CurrentViewModel = PageViewModels[0];
         }
 
         public void ChangeViewModel(IPageViewModel viewModel)
@@ -52,7 +52,7 @@ namespace Battleships.ViewModel.Navigation
                 PageViewModels.Add(viewModel);
             }
 
-            CurrentPageViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
+            CurrentViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
         }
     }
 }

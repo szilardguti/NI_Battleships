@@ -17,6 +17,6 @@
             <v:MainPage />
         </DataTemplate>
     </Window.Resources>
-    <Frame Content="{Binding CurrentPageViewModel}"/>
+    <Frame Content="{Binding CurrentPage}"/>
 
 </Window>
