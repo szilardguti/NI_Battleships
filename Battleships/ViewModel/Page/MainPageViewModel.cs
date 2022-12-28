@@ -23,5 +23,24 @@ namespace Battleships.ViewModel.Page
                 return _instance;
             }
         }
+
+        private ICommand _navigateToHistoryPage;
+
+        public ICommand NavigateToHistoryPage
+        {
+            get
+            {
+                return _navigateToHistoryPage;
+            }
+            set
+            {
+                _navigateToHistoryPage = value;
+            }
+        }
+
+        public MainPageViewModel()
+        {
+            NavigateToHistoryPage = CommandConstants.NavigateToHistoryPage;
+        }
     }
 }

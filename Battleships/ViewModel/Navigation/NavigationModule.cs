@@ -1,7 +1,9 @@
-﻿using Battleships.ViewModel.Page;
+﻿using Battleships.ViewModel.Command;
+using Battleships.ViewModel.Page;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -21,16 +23,20 @@ namespace Battleships.ViewModel.Navigation
             }
         }
 
-        private IPageViewModel _currentViewModel;
-        public IPageViewModel CurrentViewModel
+        private ViewModelBase _currentViewModel;
+        public ViewModelBase CurrentViewModel
         {
             get { return _currentViewModel; }
-            set { _currentViewModel = value; }
+            set
+            {
+                _currentViewModel = value;
+                OnCurrentViewModelChanged();
+            }
         }
 
-        private Collection<IPageViewModel> _pageViewModels;
+        private Collection<ViewModelBase> _pageViewModels;
 
-        public Collection<IPageViewModel> PageViewModels
+        public Collection<ViewModelBase> PageViewModels
         {
             get { return _pageViewModels; }
             set { _pageViewModels = value; }
@@ -38,7 +44,7 @@ namespace Battleships.ViewModel.Navigation
 
         public NavigationModule()
         {
-            PageViewModels = new Collection<IPageViewModel>
+            PageViewModels = new Collection<ViewModelBase>
             {
                 new MainPageViewModel()
             };
@@ -46,7 +52,14 @@ namespace Battleships.ViewModel.Navigation
             CurrentViewModel = PageViewModels[0];
         }
 
-        public void ChangeViewModel(IPageViewModel viewModel)
+        public event Action CurrentViewModelChanged;
+
+        private void OnCurrentViewModelChanged()
+        {
+            CurrentViewModelChanged?.Invoke();
+        }
+
+        public void ChangeViewModel(ViewModelBase viewModel)
         {
             if (!PageViewModels.Contains(viewModel))
             {

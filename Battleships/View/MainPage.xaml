@@ -130,6 +130,7 @@
             Grid.Row="3"
             Width="100"
             Height="50"
+            Command="{Binding NavigateToHistoryPage}"
             >
             <Button.Style>
                 <Style TargetType="Button">
