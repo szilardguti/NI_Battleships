@@ -1,34 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 
 namespace Battleships.ViewModel
 {
     public class AppWindowViewModel : INotifyPropertyChanged
     {
-        private IPageViewModel currentPageViewModel;
-        private List<IPageViewModel> pageViewModels;
-
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private IPageViewModel _currentPageViewModel;
+        public IPageViewModel CurrentPageViewModel
+        {
+            get { return _currentPageViewModel; }
+            set { _currentPageViewModel = value; }
+        }
+
+        private List<IPageViewModel> _pageViewModels;
+
+        public List<IPageViewModel> PageViewModels
+        {
+            get { return _pageViewModels; }
+            set { _pageViewModels = value; }
+        }
 
         public AppWindowViewModel()
         {
-            pageViewModels.Add(new MainPageViewModel());
+            PageViewModels = new List<IPageViewModel>();
 
-            currentPageViewModel = pageViewModels[0];
+            PageViewModels.Add(new MainPageViewModel());
+
+            CurrentPageViewModel = PageViewModels[0];
         }
-
-        public IPageViewModel CurrentPageViewModel { get { return currentPageViewModel; } }
-        public List<IPageViewModel> PageViewModels { get { return pageViewModels; } }
 
         private void ChangeViewModel(IPageViewModel viewModel)
         {
-            if (!pageViewModels.Contains(viewModel))
-                pageViewModels.Add(viewModel);
+            if (!PageViewModels.Contains(viewModel))
+            {
+                PageViewModels.Add(viewModel);
+            }
 
-            currentPageViewModel = pageViewModels.FirstOrDefault(vm => vm == viewModel);
+            CurrentPageViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
         }
     }
 }
