@@ -6,6 +6,8 @@ namespace Battleships.DAL.Entities
 {
     public class GameResult
     {
+        public int Id { get; set; }
+
         public string FirstPlayerName { get; set; }
 
         public string SecondPlayerName { get; set; }
