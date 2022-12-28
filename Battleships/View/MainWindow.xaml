@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Battleships"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="450" Width="800"
+        xmlns:v="clr-namespace:Battleships.View"
+        xmlns:vm="clr-namespace:Battleships.ViewModel"
+        >
+    <Window.DataContext>
+        <vm:AppWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:MainPageViewModel}">
+            <v:MainPage />
+        </DataTemplate>
+    </Window.Resources>
+    <Frame Content="{Binding CurrentPageViewModel}"/>
+
 </Window>
