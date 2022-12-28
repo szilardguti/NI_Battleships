@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Battleships.ViewModel
 {
-    public class MainPageViewModel : INotifyPropertyChanged
+    public class MainPageViewModel : IPageViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
     }
