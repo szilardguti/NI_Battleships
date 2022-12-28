@@ -8,13 +8,23 @@
         Title="MainWindow" Height="450" Width="800"
         xmlns:v="clr-namespace:Battleships.View"
         xmlns:vm="clr-namespace:Battleships.ViewModel"
+        xmlns:vmp="clr-namespace:Battleships.ViewModel.Page"
         >
     <Window.DataContext>
         <vm:AppWindowViewModel/>
     </Window.DataContext>
     <Window.Resources>
-        <DataTemplate DataType="{x:Type vm:MainPageViewModel}">
+        <DataTemplate DataType="{x:Type vmp:MainPageViewModel}">
             <v:MainPage />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmp:HistoryPageViewModel}">
+            <v:HistoryPage />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmp:PlayAgainstAIViewModel}">
+            <v:PlayerAIPage />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmp:PlayAgainstPlayerViewModel}">
+            <v:PlayerPlayerPage />
         </DataTemplate>
     </Window.Resources>
     <Frame Content="{Binding CurrentPage}"/>

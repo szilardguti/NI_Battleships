@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace Battleships.ViewModel
+namespace Battleships.ViewModel.Page
 {
-    public class MainPageViewModel : IPageViewModel
+    public class PlayAgainstPlayerViewModel : IPageViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
     }
