@@ -5,13 +5,13 @@ using System.Text;
 
 namespace Battleships.ViewModel.Page
 {
-    public class PlayAgainstPlayerViewModel : ViewModelBase
+    public class PlayAgainstPlayerViewModel : PlayPageViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         private static PlayAgainstPlayerViewModel _instance;
 
-        public static ViewModelBase Instance
+        public static PlayPageViewModel Instance
         {
             get
             {
