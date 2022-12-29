@@ -26,7 +26,9 @@
             >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid
+                        Margin="0,50,0,0"
+                        >
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
