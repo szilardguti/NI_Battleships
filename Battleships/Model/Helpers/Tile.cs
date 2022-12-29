@@ -9,8 +9,8 @@ namespace Battleships.Model.Helpers
         private int _x;
         private int _y;
         private TileStatus _tileStatus;
-        
-        public int X { 
+        public int X
+        {
             get { return _x; }
             set { _x = value; }
         }

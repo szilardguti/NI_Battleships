@@ -1,9 +1,9 @@
-﻿using Battleships.Model.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using Battleships.Model.Helpers;
 
 namespace Battleships.Model
 {
