@@ -24,8 +24,55 @@
             Grid.Column="1"
             ItemsSource="{Binding ListOfResults}"
             >
-            
-            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock 
+                            Grid.Row="0"
+                            Text="{Binding FirstPlayerName}" />
+                        <TextBlock 
+                            Grid.Row="0"
+                            Margin="50,0,0,0"
+                            Text="|Hits:" />
+                        <TextBlock 
+                            Grid.Row="0"
+                            Margin="20,0,0,0"
+                            Text="{Binding FirstPlayerHitCount}" />
+                        <TextBlock 
+                            Grid.Row="0"
+                            Margin="50,0,0,0"
+                            Text="{Binding SecondPlayerName}" />
+                        <TextBlock 
+                            Grid.Row="0"
+                            Margin="50,0,0,0"
+                            Text="|Hits:" />
+                        <TextBlock 
+                            Grid.Row="0"
+                            Margin="20,0,0,0"
+                            Text="{Binding SecondPlayerHitCount}" />
+                        <TextBlock 
+                            Grid.Row="0"
+                            Margin="50,0,0,0"
+                            Text="|Rounds:" />
+                        <TextBlock 
+                            Grid.Row="0"
+                            Margin="20,0,0,0"
+                            Text="{Binding RoundCount}" />
+                        <TextBlock 
+                            Grid.Row="0"
+                            Margin="50,0,0,0"
+                            Text="|Winner:" />
+                        <TextBlock 
+                            Grid.Row="0"
+                            Margin="20,0,0,0"
+                            Text="{Binding WinnerName}" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
         </ListView>
 
     </Grid>
