@@ -27,5 +27,30 @@ namespace Battleships.Model.Helpers
             set { _tileStatus = value; }
         }
 
+        public bool Equals(Tile other)
+        {
+            if ( this.X == other.X && this.Y == other.Y)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsNextTo(Tile other)
+        {
+            if ((this.X - 1 == other.X && this.Y - 1 == other.Y) ||
+                (this.X == other.X && this.Y - 1 == other.Y) ||
+                (this.X + 1 == other.X && this.Y - 1 == other.Y) ||
+                (this.X - 1 == other.X && this.Y == other.Y) ||
+                (this.X + 1 == other.X && this.Y == other.Y) ||
+                (this.X - 1 == other.X && this.Y + 1 == other.Y) ||
+                (this.X == other.X && this.Y + 1 == other.Y) ||
+                (this.X + 1 == other.X && this.Y + 1 == other.Y))
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }

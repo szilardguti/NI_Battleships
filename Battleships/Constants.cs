@@ -8,14 +8,15 @@ namespace Battleships
     {
         public const int PlayerBoardSize = 10;
 
-        public static readonly IEnumerable<ShipModel> PlayableShips = new ReadOnlyCollection<ShipModel>(
+        /*public static readonly IEnumerable<ShipModel> PlayableShips = new ReadOnlyCollection<ShipModel>(
             new List<ShipModel>
             {
-                new ShipModel() { Name = "Carrier", Length = 5, Health = 5, IsVertical = true },
-                new ShipModel() { Name = "Battleship", Length = 4, Health = 4, IsVertical = true },
-                new ShipModel() { Name = "Cruiser", Length = 3, Health = 3, IsVertical = true },
-                new ShipModel() { Name = "Submarine", Length = 3, Health = 3, IsVertical = true },
-                new ShipModel() { Name = "Destroyer", Length = 2, Health = 2, IsVertical = true },
+                new ShipModel() { Name = "Carrier", IsVertical = true }, // size 5
+                new ShipModel() { Name = "Battleship", IsVertical = true }, // size 4
+                new ShipModel() { Name = "Cruiser", IsVertical = true}, // size 3
+                new ShipModel() { Name = "Submarine", IsVertical = true}, // size 3
+                new ShipModel() { Name = "Destroyer", IsVertical = true}, // size 2
             });
+        */
     }
 }
