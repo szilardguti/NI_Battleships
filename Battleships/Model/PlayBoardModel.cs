@@ -1,29 +1,31 @@
-﻿using System;
+﻿using Battleships.Model.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace Battleships.Model
 {
     public class PlayBoardModel
     {
-        public Collection<Collection<TileStatus>> Tiles { get; set; }
+        public Collection<Tile> Tiles { get; set; }
 
         public Collection<ShipModel> Ships { get; set; }
 
-        public PlayBoardModel(Collection<Collection<TileStatus>> tiles, Collection<ShipModel> ships)
+        public PlayBoardModel(Collection<Tile> tiles, Collection<ShipModel> ships)
         {
             Tiles = tiles;
             Ships = ships;
         }
 
-        public TileStatus GetTile(int rowIndex, int colIndex)
+        public Tile GetTile(int rowIndex, int colIndex)
         {
-            return Tiles[rowIndex][colIndex];
+            return Tiles.FirstOrDefault(tile => tile.X == rowIndex && tile.Y == colIndex);
         }
         public void SetTile(int rowIndex, int colIndex, TileStatus tileStatus)
         {
-            Tiles[rowIndex][colIndex] = tileStatus;
+            Tiles.FirstOrDefault(tile => tile.X == rowIndex && tile.Y == colIndex).TileStatus = tileStatus;
         }
     }
 }
