@@ -22,6 +22,6 @@ namespace Battleships.DAL.Entities
 
         public string WinnerName { get; set; }
 
-        public ICollection<GameActions> Actions { get; set; }
+        public ICollection<GameAction> Actions { get; set; }
     }
 }
