@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
+using Battleships.DAL.Configurations;
 using Battleships.DAL.Entities;
+using Battleships.Model;
+using Battleships.Model.Helpers;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace Battleships.DAL
 {
     public class GameResultContext : DbContext
     {
         public DbSet<GameResult> Results { get; set; }
-        public DbSet<GameActions> Actions { get; set; }
-
+        public DbSet<GameAction> Actions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,6 +29,8 @@ namespace Battleships.DAL
             modelBuilder.Entity<GameResult>()
                 .HasMany(result => result.Actions)
                 .WithOne(act => act.GameResult);
+
+            new GameActionConfiguration().Configure(modelBuilder.Entity<GameAction>());
         }
     }
 }
