@@ -14,8 +14,5 @@ namespace Battleships.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public static ViewModelBase Instance { get; set; }
-
     }
 }

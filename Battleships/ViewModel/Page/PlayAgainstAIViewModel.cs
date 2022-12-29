@@ -3,7 +3,7 @@ using Battleships.Model;
 
 namespace Battleships.ViewModel.Page
 {
-    public class PlayAgainstAIViewModel : ViewModelBase
+    public class PlayAgainstAIViewModel : PlayPageViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -11,7 +11,7 @@ namespace Battleships.ViewModel.Page
         private PlayBoardModel _playerModel;
         private PlayBoardModel _aiModel;
 
-        public static ViewModelBase Instance
+        public static PlayPageViewModel Instance
         {
             get
             {
