@@ -9,6 +9,14 @@ namespace Battleships.ViewModel.Command
     public static class CommandConstants
     {
         private static readonly NavigationCommand _navigateToHistoryPage = new NavigationCommand(HistoryPageViewModel.Instance);
-        public static readonly ICommand NavigateToHistoryPage = _navigateToHistoryPage;
+        public static ICommand NavigateToHistoryPage
+        {
+            get
+            {
+                HistoryPageViewModel.Instance.LoadData();
+
+                return _navigateToHistoryPage;
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Battleships.ViewModel.Page
 
         private static HistoryPageViewModel _instance;
 
-        public static ViewModelBase Instance
+        public static HistoryPageViewModel Instance
         {
             get
             {
@@ -39,13 +39,15 @@ namespace Battleships.ViewModel.Page
             }
         }
 
-        private void LoadData()
+        public void LoadData()
         {
             // Load in list of database entities
             // TODO
             Collection<object> collection = new Collection<object>();
 
             ListOfResults = collection;
+
+            OnPropertyChanged(nameof(ListOfResults));
         }
     }
 }

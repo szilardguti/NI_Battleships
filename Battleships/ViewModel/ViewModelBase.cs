@@ -17,8 +17,6 @@ namespace Battleships.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public static ViewModelBase Instance { get; set; }
-
         public Collection<Tile> Tiles { get { return _tiles; } }
 
         public void initGame()
