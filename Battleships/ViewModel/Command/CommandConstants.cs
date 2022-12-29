@@ -18,5 +18,32 @@ namespace Battleships.ViewModel.Command
                 return _navigateToHistoryPage;
             }
         }
+
+        private static readonly NavigationCommand _navigateToMainPage = new NavigationCommand(MainPageViewModel.Instance);
+        public static ICommand NavigateToMainPage
+        {
+            get
+            {
+                return _navigateToMainPage;
+            }
+        }
+
+        private static readonly NavigationCommand _navigateToPlayerAgainstPlayerPage = new NavigationCommand(PlayAgainstPlayerViewModel.Instance);
+        public static ICommand NavigateToPlayerAgainstPlayerPage
+        {
+            get
+            {
+                return _navigateToPlayerAgainstPlayerPage;
+            }
+        }
+
+        private static readonly NavigationCommand _navigateToPlayerAgainstAIPage = new NavigationCommand(PlayAgainstAIViewModel.Instance);
+        public static ICommand NavigateToPlayerAgainstAIPage
+        {
+            get
+            {
+                return _navigateToPlayerAgainstAIPage;
+            }
+        }
     }
 }
