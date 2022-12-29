@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleships.DAL.Entities;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -12,7 +13,7 @@ namespace Battleships.ViewModel.Page
 
         private static HistoryPageViewModel _instance;
 
-        public static ViewModelBase Instance
+        public static HistoryPageViewModel Instance
         {
             get
             {
@@ -22,13 +23,13 @@ namespace Battleships.ViewModel.Page
             }
         }
 
-        private Collection<object> _listOfResults;
+        private Collection<GameResult> _listOfResults;
 
-        public Collection<object> ListOfResults
+        public Collection<GameResult> ListOfResults
         {
             get
             {
-                _listOfResults ??= new Collection<object>();
+                _listOfResults ??= new Collection<GameResult>();
 
                 return _listOfResults;
             }
@@ -39,13 +40,15 @@ namespace Battleships.ViewModel.Page
             }
         }
 
-        private void LoadData()
+        public void LoadData()
         {
             // Load in list of database entities
             // TODO
-            Collection<object> collection = new Collection<object>();
+            Collection<GameResult> collection = new Collection<GameResult>();
 
             ListOfResults = collection;
+
+            OnPropertyChanged(nameof(ListOfResults));
         }
     }
 }
