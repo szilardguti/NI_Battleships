@@ -1,11 +1,7 @@
-﻿using Battleships.ViewModel.Command;
-using Battleships.ViewModel.Page;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Text;
+using Battleships.ViewModel.Page;
 
 namespace Battleships.ViewModel.Navigation
 {

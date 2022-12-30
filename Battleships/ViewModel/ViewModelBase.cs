@@ -1,8 +1,4 @@
-﻿using Battleships.Model.Helpers;
-using Battleships.ViewModel.Page;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Battleships.ViewModel
 {

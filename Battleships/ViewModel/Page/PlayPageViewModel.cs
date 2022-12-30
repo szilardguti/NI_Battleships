@@ -49,18 +49,28 @@ namespace Battleships.ViewModel.Page
         public ObservableCollection<TileItem> FirstPlayerTileItems { get; set; }
         public ObservableCollection<TileItem> SecondPlayerTileItems { get; set; }
 
-        private ICommand _mouseDownCommand;
-        private ICommand _nextPlayerCommand;
+        private readonly ICommand _mouseDownCommand;
+        private readonly ICommand _nextPlayerCommand;
 
         public ICommand MouseDownCommand { get { return _mouseDownCommand; } }
         public ICommand NextPlayerCommand { get { return _nextPlayerCommand; } }
 
+        private readonly PlayBoardModel _player1Model;
+        private readonly PlayBoardModel _player2Model;
+
+        public PlayBoardModel Player1Model { get { return _player1Model; } }
+        public PlayBoardModel Player2Model { get { return _player2Model; } }
+
         protected PlayPageViewModel()
         {
+            _player1Model = new PlayBoardModel();
+            _player2Model = new PlayBoardModel();
             _mouseDownCommand = new CommandBase(ExecuteTileClick);
             _nextPlayerCommand = new CommandBase(NextPlayer);
             FirstPlayerTileItems = new ObservableCollection<TileItem>();
             SecondPlayerTileItems = new ObservableCollection<TileItem>();
+            DrawPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
+            DrawOtherPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
         }
 
         public abstract void NextPlayer(object parameter);

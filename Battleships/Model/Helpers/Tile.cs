@@ -29,7 +29,7 @@ namespace Battleships.Model.Helpers
 
         public bool Equals(Tile other)
         {
-            if ( this.X == other.X && this.Y == other.Y)
+            if (this.X == other.X && this.Y == other.Y)
             {
                 return true;
             }
@@ -51,6 +51,5 @@ namespace Battleships.Model.Helpers
             }
             return false;
         }
-
     }
 }

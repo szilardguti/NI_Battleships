@@ -162,7 +162,6 @@ namespace Battleships.Model
             {
                 foreach (Tile other in ship2.Positions)
                 {
-
                     if (tile.Equals(other) || tile.IsNextTo(other))
                     {
                         return true;
