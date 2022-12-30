@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Battleships.Model;
 
@@ -89,7 +90,7 @@ namespace Battleships.ViewModel.Page
             }
         }
 
-        public override void NextPlayer(object parameter)
+        /*public override void NextPlayer(object parameter)
         {
             if (!CanShoot)
             {
@@ -97,6 +98,8 @@ namespace Battleships.ViewModel.Page
                 {
                     DrawPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
                     DrawOtherPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
+                    Rounds += 1;
+                    OnPropertyChanged(nameof(Rounds));
                 }
                 else
                 {
@@ -105,6 +108,6 @@ namespace Battleships.ViewModel.Page
                 }
                 CanShoot = true;
             }
-        }
+        }*/
     }
 }

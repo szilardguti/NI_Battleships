@@ -87,7 +87,7 @@ namespace Battleships.ViewModel.Page
             }
         }
 
-        public override void NextPlayer(object parameter)
+        /*public override void NextPlayer(object parameter)
         {
             if (!CanShoot)
             {
@@ -95,6 +95,8 @@ namespace Battleships.ViewModel.Page
                 {
                     DrawPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
                     DrawOtherPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
+                    Rounds += 1;
+                    OnPropertyChanged(nameof(Rounds));
                 }
                 else
                 {
@@ -102,9 +104,7 @@ namespace Battleships.ViewModel.Page
                     DrawOtherPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
                 }
                 CanShoot = true;
-                Rounds += 1;
-                OnPropertyChanged(nameof(Rounds));
             }
-        }
+        }*/
     }
 }

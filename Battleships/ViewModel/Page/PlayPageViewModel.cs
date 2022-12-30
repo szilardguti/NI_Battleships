@@ -123,7 +123,25 @@ namespace Battleships.ViewModel.Page
         public PlayBoardModel Player1Model { get { return _player1Model; } }
         public PlayBoardModel Player2Model { get { return _player2Model; } }
 
-        public abstract void NextPlayer(object parameter);
+        public void NextPlayer(object parameter)
+        {
+            if (!CanShoot)
+            {
+                if (CurrentPlayer == 1)
+                {
+                    DrawPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
+                    DrawOtherPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
+                    Rounds += 1;
+                    OnPropertyChanged(nameof(Rounds));
+                }
+                else
+                {
+                    DrawPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
+                    DrawOtherPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
+                }
+                CanShoot = true;
+            }
+        }
         public abstract void ExecuteTileClick(object parameter);
         public void DrawPlayBoardToCanvas(PlayBoardModel playBoard, ObservableCollection<TileItem> tileItems)
         {
