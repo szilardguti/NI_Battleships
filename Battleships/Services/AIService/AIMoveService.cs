@@ -18,8 +18,8 @@ namespace Battleships.Services.AIService
                 if (unfinishedShipTile.X != 0)
                 {
                     Tile currentTile = enemyPlayBoard.GetTile(unfinishedShipTile.X - 1, unfinishedShipTile.Y);
-                    if (currentTile.TileStatus != TileStatus.MissShot ||
-                        currentTile.TileStatus != TileStatus.HitShot ||
+                    if (currentTile.TileStatus != TileStatus.MissShot &&
+                        currentTile.TileStatus != TileStatus.HitShot &&
                         currentTile.TileStatus != TileStatus.Destroyed)
                     {
                         possibleTiles.Add(currentTile);
@@ -28,8 +28,8 @@ namespace Battleships.Services.AIService
                 if (unfinishedShipTile.X != Constants.PlayerBoardSize - 1)
                 {
                     Tile currentTile = enemyPlayBoard.GetTile(unfinishedShipTile.X + 1, unfinishedShipTile.Y);
-                    if (currentTile.TileStatus != TileStatus.MissShot ||
-                        currentTile.TileStatus != TileStatus.HitShot ||
+                    if (currentTile.TileStatus != TileStatus.MissShot &&
+                        currentTile.TileStatus != TileStatus.HitShot &&
                         currentTile.TileStatus != TileStatus.Destroyed)
                     {
                         possibleTiles.Add(currentTile);
@@ -38,8 +38,8 @@ namespace Battleships.Services.AIService
                 if (unfinishedShipTile.Y != 0)
                 {
                     Tile currentTile = enemyPlayBoard.GetTile(unfinishedShipTile.X, unfinishedShipTile.Y + 1);
-                    if (currentTile.TileStatus != TileStatus.MissShot ||
-                        currentTile.TileStatus != TileStatus.HitShot ||
+                    if (currentTile.TileStatus != TileStatus.MissShot &&
+                        currentTile.TileStatus != TileStatus.HitShot &&
                         currentTile.TileStatus != TileStatus.Destroyed)
                     {
                         possibleTiles.Add(currentTile);
@@ -48,8 +48,8 @@ namespace Battleships.Services.AIService
                 if (unfinishedShipTile.Y != Constants.PlayerBoardSize - 1)
                 {
                     Tile currentTile = enemyPlayBoard.GetTile(unfinishedShipTile.X, unfinishedShipTile.Y - 1);
-                    if (currentTile.TileStatus != TileStatus.MissShot ||
-                        currentTile.TileStatus != TileStatus.HitShot ||
+                    if (currentTile.TileStatus != TileStatus.MissShot &&
+                        currentTile.TileStatus != TileStatus.HitShot &&
                         currentTile.TileStatus != TileStatus.Destroyed)
                     {
                         possibleTiles.Add(currentTile);
