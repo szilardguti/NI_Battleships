@@ -3,7 +3,7 @@ using Battleships.ViewModel.Page;
 
 namespace Battleships.ViewModel.Command
 {
-    public static class CommandConstants
+    public static class NavigationCommandConstants
     {
         private static readonly NavigationCommand _navigateToHistoryPage = new NavigationCommand(HistoryPageViewModel.Instance);
         public static ICommand NavigateToHistoryPage
