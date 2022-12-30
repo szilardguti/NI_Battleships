@@ -11,6 +11,7 @@ namespace Battleships.Model
         Empty = 1,
         Ship = 2,
         MissShot = 3,
-        HitShot = 4
+        HitShot = 4,
+        Destroyed = 5
     }
 }

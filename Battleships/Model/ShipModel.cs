@@ -13,7 +13,7 @@ namespace Battleships.Model
 
         public int Length { get; set; }
 
-        public int Health { get { return _positions.Count(tile => tile.TileStatus == TileStatus.Ship); } }
+        public int Health { get; set; }
 
         public bool IsVertical { get; set; }
 

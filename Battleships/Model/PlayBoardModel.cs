@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Battleships.Model.Helpers;
@@ -22,9 +23,80 @@ namespace Battleships.Model
         {
             return Tiles.FirstOrDefault(tile => tile.X == rowIndex && tile.Y == colIndex);
         }
-        public void SetTile(int rowIndex, int colIndex, TileStatus tileStatus)
+        private void SetTile(int rowIndex, int colIndex, TileStatus tileStatus)
         {
             Tiles.FirstOrDefault(tile => tile.X == rowIndex && tile.Y == colIndex).TileStatus = tileStatus;
+        }
+
+        public void Hit(int x, int y)
+        {
+            SetTile(x, y, TileStatus.HitShot);
+
+            foreach (ShipModel ship in Ships)
+            {
+                if (ShipContainsTile(ship, x, y))
+                {
+                    ship.Health--;
+                }
+                if (ship.Health == 0)
+                {
+                    DestroyShip(ship);
+                    foreach (Tile tile in GetAdjacentTilesForShip(ship))
+                    {
+                        tile.TileStatus = TileStatus.MissShot;
+                    }
+                }
+            }
+        }
+
+        public void Miss(int x, int y)
+        {
+            SetTile(x, y, TileStatus.MissShot);
+        }
+
+        private bool ShipContainsTile(ShipModel ship, int x, int y)
+        {
+            return ship.Positions.Any(tile => tile.X == x && tile.Y == y);
+        }
+
+        private void DestroyShip(ShipModel ship)
+        {
+            foreach (Tile tile in ship.Positions)
+            {
+                SetTile(tile.X, tile.Y, TileStatus.Destroyed);
+            }
+        }
+
+        private HashSet<Tile> GetAdjacentTilesForShip(ShipModel ship)
+        {
+            HashSet<Tile> tiles = new HashSet<Tile>();
+
+            foreach (Tile tile in ship.Positions)
+            {
+                foreach (Tile adjacent in GetAdjacentTilesForTile(tile))
+                {
+                    if (adjacent.TileStatus == TileStatus.Empty)
+                    {
+                        tiles.Add(adjacent);
+                    }
+                }
+            }
+            return tiles;
+        }
+
+        private Collection<Tile> GetAdjacentTilesForTile(Tile tile)
+        {
+            return new Collection<Tile>
+            {
+                GetTile(tile.X - 1, tile.Y - 1),
+                GetTile(tile.X, tile.Y - 1),
+                GetTile(tile.X + 1, tile.Y - 1),
+                GetTile(tile.X - 1, tile.Y),
+                GetTile(tile.X + 1, tile.Y),
+                GetTile(tile.X - 1, tile.Y + 1),
+                GetTile(tile.X, tile.Y + 1),
+                GetTile(tile.X + 1, tile.Y + 1)
+            };
         }
 
         private void InitializeTiles()
@@ -50,11 +122,11 @@ namespace Battleships.Model
             Ships = null;
             Ships = new Collection<ShipModel>
             {
-                new ShipModel() { Name = "Carrier", Length = 5, IsVertical = false },
-                new ShipModel() { Name = "Battleship", Length = 4, IsVertical = false },
-                new ShipModel() { Name = "Cruiser", Length = 3, IsVertical = true },
-                new ShipModel() { Name = "Submarine", Length = 3, IsVertical = true },
-                new ShipModel() { Name = "Destroyer", Length = 2, IsVertical = true }
+                new ShipModel() { Name = "Carrier", Length = 5, Health = 5, IsVertical = false },
+                new ShipModel() { Name = "Battleship", Length = 4, Health = 4, IsVertical = false },
+                new ShipModel() { Name = "Cruiser", Length = 3, Health = 3, IsVertical = true },
+                new ShipModel() { Name = "Submarine", Length = 3, Health = 3, IsVertical = true },
+                new ShipModel() { Name = "Destroyer", Length = 2, Health = 2, IsVertical = true }
             };
         }
 
@@ -159,7 +231,7 @@ namespace Battleships.Model
             {
                 x = r.Next(0, 10);
                 y = r.Next(0, 10);
-
+                ship.IsVertical = r.Next(0, 2) == 0 ? true : false;
                 isValid = true;
 
                 for (int i = 0; i < ship.Length; i++)
