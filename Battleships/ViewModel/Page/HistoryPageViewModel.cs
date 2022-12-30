@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using Battleships.DAL;
 using Battleships.DAL.Entities;
 
 namespace Battleships.ViewModel.Page
@@ -20,9 +22,16 @@ namespace Battleships.ViewModel.Page
             }
         }
 
-        private Collection<GameResult> _listOfResults;
+        private HistoryPageViewModel()
+        {
+            ResultRepository = new ResultRepository();
+        }
 
-        public Collection<GameResult> ListOfResults
+        private ResultRepository ResultRepository { get; set; }
+
+        private ICollection<GameResult> _listOfResults;
+
+        public ICollection<GameResult> ListOfResults
         {
             get
             {
@@ -39,11 +48,7 @@ namespace Battleships.ViewModel.Page
 
         public void LoadData()
         {
-            // Load in list of database entities
-            // TODO
-            Collection<GameResult> collection = new Collection<GameResult>();
-
-            ListOfResults = collection;
+            ListOfResults = ResultRepository.GetAllGames();
 
             OnPropertyChanged(nameof(ListOfResults));
         }
