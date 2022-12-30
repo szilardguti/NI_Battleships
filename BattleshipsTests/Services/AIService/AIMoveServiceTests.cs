@@ -1,8 +1,7 @@
-﻿using Battleships.Model;
+﻿using System.Linq;
+using Battleships.Model;
 using Battleships.Model.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Battleships.Services.AIService;
-using System.Linq;
 
 namespace Battleships.Services.AIService.Tests
 {
