@@ -41,9 +41,11 @@ namespace Battleships.ViewModel.Page
                     {
                         Tuple<bool, bool> winAndDestroy = Player2Model.Hit(xIndex, yIndex);
                         Winner = winAndDestroy.Item1 ? 1 : 0;
+
+                        OnPropertyChanged(nameof(Player1Model.Player.HitCount));
+
                         if (winAndDestroy.Item2)
                         {
-                            OnPropertyChanged(nameof(Player1Model.Player.HitCount));
                             OnPropertyChanged(nameof(Player2Model.Player.CarrierCount));
                             OnPropertyChanged(nameof(Player2Model.Player.SubmarineCount));
                             OnPropertyChanged(nameof(Player2Model.Player.DestroyerCount));
@@ -67,9 +69,11 @@ namespace Battleships.ViewModel.Page
                     {
                         Tuple<bool, bool> winAndDestroy = Player1Model.Hit(xIndex, yIndex);
                         Winner = winAndDestroy.Item1 ? 1 : 0;
+
+                        OnPropertyChanged(nameof(Player2Model.Player.HitCount));
+
                         if (winAndDestroy.Item2)
                         {
-                            OnPropertyChanged(nameof(Player2Model.Player.HitCount));
                             OnPropertyChanged(nameof(Player1Model.Player.CarrierCount));
                             OnPropertyChanged(nameof(Player1Model.Player.SubmarineCount));
                             OnPropertyChanged(nameof(Player1Model.Player.DestroyerCount));
