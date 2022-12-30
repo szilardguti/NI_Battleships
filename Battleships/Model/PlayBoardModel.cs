@@ -76,6 +76,29 @@ namespace Battleships.Model
             {
                 SetTile(tile.X, tile.Y, TileStatus.Destroyed);
             }
+
+            switch (ship.Name)
+            {
+                case Constants.ShipSize5Name:
+                    Player.CarrierCount -= 1;
+                    break;
+
+                case Constants.ShipSize4Name:
+                    Player.BattleshipCount -= 1;
+                    break;
+
+                case Constants.ShipSize3Name1:
+                    Player.SubmarineCount -= 1;
+                    break;
+
+                case Constants.ShipSize3Name2:
+                    Player.CruiserCount -= 1;
+                    break;
+
+                case Constants.ShipSize2Name:
+                    Player.DestroyerCount -= 1;
+                    break;
+            }
         }
 
         private HashSet<Tile> GetAdjacentTilesForShip(ShipModel ship)
@@ -133,11 +156,11 @@ namespace Battleships.Model
             Ships = null;
             Ships = new Collection<ShipModel>
             {
-                new ShipModel() { Name = "Carrier", Length = 5, Health = 5, IsVertical = false },
-                new ShipModel() { Name = "Battleship", Length = 4, Health = 4, IsVertical = false },
-                new ShipModel() { Name = "Cruiser", Length = 3, Health = 3, IsVertical = true },
-                new ShipModel() { Name = "Submarine", Length = 3, Health = 3, IsVertical = true },
-                new ShipModel() { Name = "Destroyer", Length = 2, Health = 2, IsVertical = true }
+                new ShipModel() { Name = Constants.ShipSize5Name, Length = 5, Health = 5, IsVertical = false },
+                new ShipModel() { Name = Constants.ShipSize4Name, Length = 4, Health = 4, IsVertical = false },
+                new ShipModel() { Name = Constants.ShipSize3Name1, Length = 3, Health = 3, IsVertical = true },
+                new ShipModel() { Name = Constants.ShipSize3Name2, Length = 3, Health = 3, IsVertical = true },
+                new ShipModel() { Name = Constants.ShipSize2Name, Length = 2, Health = 2, IsVertical = true }
             };
         }
 

@@ -8,6 +8,12 @@ namespace Battleships
     {
         public const int PlayerBoardSize = 10;
 
+        public const string ShipSize5Name = "Carrier";
+        public const string ShipSize4Name = "Battleship";
+        public const string ShipSize3Name1 = "Submarine";
+        public const string ShipSize3Name2 = "Cruiser";
+        public const string ShipSize2Name = "Destroyer";
+
         /*public static readonly IEnumerable<ShipModel> PlayableShips = new ReadOnlyCollection<ShipModel>(
             new List<ShipModel>
             {

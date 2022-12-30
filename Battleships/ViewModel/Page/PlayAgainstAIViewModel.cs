@@ -39,6 +39,12 @@ namespace Battleships.ViewModel.Page
                     if (status == TileStatus.Ship)
                     {
                         Winner = Player2Model.Hit(xIndex, yIndex) ? 1 : 0;
+
+                        OnPropertyChanged(nameof(Player2Model.Player.CarrierCount));
+                        OnPropertyChanged(nameof(Player2Model.Player.BattleshipCount));
+                        OnPropertyChanged(nameof(Player2Model.Player.SubmarineCount));
+                        OnPropertyChanged(nameof(Player2Model.Player.CruiserCount));
+                        OnPropertyChanged(nameof(Player2Model.Player.DestroyerCount));
                     }
                     else if (status == TileStatus.Empty)
                     {
@@ -55,6 +61,12 @@ namespace Battleships.ViewModel.Page
                     if (status == TileStatus.Ship)
                     {
                         Winner = Player1Model.Hit(xIndex, yIndex) ? 2 : 0;
+
+                        OnPropertyChanged(nameof(Player1Model.Player.CarrierCount));
+                        OnPropertyChanged(nameof(Player1Model.Player.BattleshipCount));
+                        OnPropertyChanged(nameof(Player1Model.Player.SubmarineCount));
+                        OnPropertyChanged(nameof(Player1Model.Player.CruiserCount));
+                        OnPropertyChanged(nameof(Player1Model.Player.DestroyerCount));
                     }
                     else if (status == TileStatus.Empty)
                     {
