@@ -10,7 +10,7 @@ namespace Battleships.ViewModel.Page
     public abstract class PlayPageViewModel : ViewModelBase
     {
         private int _rounds;
-        public int Rounds { get { return _rounds; } }
+        public int Rounds { get { return _rounds; } set { _rounds = value; } }
 
         private int _winner = 0;
         private int _currentPlayer = 1;
