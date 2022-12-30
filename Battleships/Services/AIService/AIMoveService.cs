@@ -25,6 +25,26 @@ namespace Battleships.Services.AIService
                         possibleTiles.Add(currentTile);
                     }
                 }
+                if (unfinishedShipTile.X != 0 && unfinishedShipTile.Y != 0)
+                {
+                    Tile currentTile = enemyPlayBoard.GetTile(unfinishedShipTile.X - 1, unfinishedShipTile.Y - 1);
+                    if (currentTile.TileStatus != TileStatus.MissShot &&
+                        currentTile.TileStatus != TileStatus.HitShot &&
+                        currentTile.TileStatus != TileStatus.Destroyed)
+                    {
+                        possibleTiles.Add(currentTile);
+                    }
+                }
+                if (unfinishedShipTile.X != 0 && unfinishedShipTile.Y != Constants.PlayerBoardSize - 1)
+                {
+                    Tile currentTile = enemyPlayBoard.GetTile(unfinishedShipTile.X - 1, unfinishedShipTile.Y + 1);
+                    if (currentTile.TileStatus != TileStatus.MissShot &&
+                        currentTile.TileStatus != TileStatus.HitShot &&
+                        currentTile.TileStatus != TileStatus.Destroyed)
+                    {
+                        possibleTiles.Add(currentTile);
+                    }
+                }
                 if (unfinishedShipTile.X != Constants.PlayerBoardSize - 1)
                 {
                     Tile currentTile = enemyPlayBoard.GetTile(unfinishedShipTile.X + 1, unfinishedShipTile.Y);
@@ -55,10 +75,30 @@ namespace Battleships.Services.AIService
                         possibleTiles.Add(currentTile);
                     }
                 }
+                if (unfinishedShipTile.X != Constants.PlayerBoardSize - 1 && unfinishedShipTile.Y != 0)
+                {
+                    Tile currentTile = enemyPlayBoard.GetTile(unfinishedShipTile.X + 1, unfinishedShipTile.Y - 1);
+                    if (currentTile.TileStatus != TileStatus.MissShot &&
+                        currentTile.TileStatus != TileStatus.HitShot &&
+                        currentTile.TileStatus != TileStatus.Destroyed)
+                    {
+                        possibleTiles.Add(currentTile);
+                    }
+                }
+                if (unfinishedShipTile.X != Constants.PlayerBoardSize - 1 && unfinishedShipTile.Y != Constants.PlayerBoardSize - 1)
+                {
+                    Tile currentTile = enemyPlayBoard.GetTile(unfinishedShipTile.X + 1, unfinishedShipTile.Y + 1);
+                    if (currentTile.TileStatus != TileStatus.MissShot &&
+                        currentTile.TileStatus != TileStatus.HitShot &&
+                        currentTile.TileStatus != TileStatus.Destroyed)
+                    {
+                        possibleTiles.Add(currentTile);
+                    }
+                }
 
                 return possibleTiles[rand.Next(possibleTiles.Count)];
             }
-            List<Tile> emptyTiles = enemyPlayBoard.Tiles.Where(tile => tile.TileStatus == TileStatus.Empty).ToList();
+            List<Tile> emptyTiles = enemyPlayBoard.Tiles.Where(tile => tile.TileStatus == TileStatus.Empty || tile.TileStatus == TileStatus.Ship).ToList();
             return emptyTiles[rand.Next(emptyTiles.Count)];
         }
 
