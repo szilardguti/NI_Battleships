@@ -20,21 +20,6 @@ namespace Battleships.ViewModel.Page
             }
         }
 
-        private string _player1Name;
-        private string _player2Name;
-
-        public string Player1Name
-        {
-            get { return _player1Name; }
-            set { _player1Name = value; }
-        }
-
-        public string Player2Name
-        {
-            get { return _player2Name; }
-            set { _player2Name = value; }
-        }
-
         private ICommand _navigateToHistoryPage;
 
         private ICommand _navigateToPlayerAgainstAIPage;

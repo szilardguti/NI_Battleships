@@ -29,9 +29,7 @@ namespace Battleships.ViewModel.Command
         {
             get
             {
-                PlayPageViewModel viewModel = new PlayAgainstPlayerViewModel(
-                    MainPageViewModel.Instance.Player1Name,
-                    MainPageViewModel.Instance.Player2Name);
+                PlayPageViewModel viewModel = new PlayAgainstPlayerViewModel();
 
                 return new NavigationCommand(viewModel);
             }
@@ -41,7 +39,7 @@ namespace Battleships.ViewModel.Command
         {
             get
             {
-                PlayPageViewModel viewModel = new PlayAgainstAIViewModel(MainPageViewModel.Instance.Player1Name);
+                PlayPageViewModel viewModel = new PlayAgainstAIViewModel();
 
                 return new NavigationCommand(viewModel);
             }

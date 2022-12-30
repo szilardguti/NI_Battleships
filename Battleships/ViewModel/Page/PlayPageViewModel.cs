@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using Battleships.Model;
@@ -9,7 +10,27 @@ namespace Battleships.ViewModel.Page
 {
     public abstract class PlayPageViewModel : ViewModelBase
     {
-        private int _rounds;
+        private bool _readyToPlay = false;
+
+        public bool ReadyToPlay
+        {
+            get
+            {
+                return _readyToPlay;
+            }
+
+            set { _readyToPlay = value; }
+        }
+
+        public Visibility PlayElementsVisibility
+        {
+            get
+            {
+                return _readyToPlay ? Visibility.Visible : Visibility.Hidden;
+            }
+        }
+
+        private int _rounds = 1;
         public int Rounds { get { return _rounds; } set { _rounds = value; } }
 
         private int _winner = 0;
