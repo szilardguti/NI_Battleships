@@ -64,9 +64,9 @@ namespace Battleships.ViewModel.Page
 
         public MainPageViewModel()
         {
-            NavigateToHistoryPage = CommandConstants.NavigateToHistoryPage;
-            NavigateToPlayerAgainstAIPage = CommandConstants.NavigateToPlayerAgainstAIPage;
-            NavigateToPlayerAgainstPlayerPage = CommandConstants.NavigateToPlayerAgainstPlayerPage;
+            NavigateToHistoryPage = NavigationCommandConstants.NavigateToHistoryPage;
+            NavigateToPlayerAgainstAIPage = NavigationCommandConstants.NavigateToPlayerAgainstAIPage;
+            NavigateToPlayerAgainstPlayerPage = NavigationCommandConstants.NavigateToPlayerAgainstPlayerPage;
         }
     }
 }
