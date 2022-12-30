@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using Battleships.Model;
@@ -41,7 +42,16 @@ namespace Battleships.ViewModel.Page
                     TileStatus status = Player2Model.GetTile(xIndex, yIndex).TileStatus;
                     if (status == TileStatus.Ship)
                     {
-                        Winner = Player2Model.Hit(xIndex, yIndex) ? 1 : 0;
+                        Tuple<bool, bool> winAndDestroy = Player2Model.Hit(xIndex, yIndex);
+                        Winner = winAndDestroy.Item1 ? 1 : 0;
+                        if (winAndDestroy.Item2)
+                        {
+                            OnPropertyChanged(nameof(Player2Model.Player.CarrierCount));
+                            OnPropertyChanged(nameof(Player2Model.Player.SubmarineCount));
+                            OnPropertyChanged(nameof(Player2Model.Player.DestroyerCount));
+                            OnPropertyChanged(nameof(Player2Model.Player.BattleshipCount));
+                            OnPropertyChanged(nameof(Player2Model.Player.CruiserCount));
+                        }
                     }
                     else if (status == TileStatus.Empty)
                     {
@@ -57,7 +67,17 @@ namespace Battleships.ViewModel.Page
                     TileStatus status = Player1Model.GetTile(xIndex, yIndex).TileStatus;
                     if (status == TileStatus.Ship)
                     {
-                        Winner = Player1Model.Hit(xIndex, yIndex) ? 2 : 0;
+                        Tuple<bool, bool> winAndDestroy = Player1Model.Hit(xIndex, yIndex);
+                        Winner = winAndDestroy.Item1 ? 1 : 0;
+                        if (winAndDestroy.Item2)
+                        {
+                            OnPropertyChanged(nameof(Player2Model.Player.CarrierCount));
+                            OnPropertyChanged(nameof(Player2Model.Player.SubmarineCount));
+                            OnPropertyChanged(nameof(Player2Model.Player.DestroyerCount));
+                            OnPropertyChanged(nameof(Player2Model.Player.BattleshipCount));
+                            OnPropertyChanged(nameof(Player2Model.Player.CruiserCount));
+                        }
+
                     }
                     else if (status == TileStatus.Empty)
                     {

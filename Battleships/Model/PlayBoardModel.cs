@@ -30,9 +30,11 @@ namespace Battleships.Model
             Tiles.FirstOrDefault(tile => tile.X == rowIndex && tile.Y == colIndex).TileStatus = tileStatus;
         }
 
-        public bool Hit(int x, int y)
+        public Tuple<bool, bool> Hit(int x, int y)
         {
             SetTile(x, y, TileStatus.HitShot);
+            bool lost = false;
+            bool destroy = false;
 
             foreach (ShipModel ship in Ships)
             {
@@ -43,17 +45,18 @@ namespace Battleships.Model
                 if (ship.Health == 0)
                 {
                     DestroyShip(ship);
+                    destroy = true;
                     foreach (Tile tile in GetAdjacentTilesForShip(ship))
                     {
                         tile.TileStatus = TileStatus.MissShot;
                     }
                     if (Lost())
                     {
-                        return true;
+                        lost = true;
                     }
                 }
             }
-            return false;
+            return new Tuple<bool, bool>(lost, destroy);
         }
         private bool Lost()
         {
