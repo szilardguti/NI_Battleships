@@ -19,6 +19,8 @@ namespace Battleships.Model
             InitializeTiles();
             InitializeShips();
             PlaceShips();
+
+            Player = new PlayerModel();
         }
 
         public Tile GetTile(int rowIndex, int colIndex)

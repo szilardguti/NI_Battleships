@@ -10,7 +10,7 @@ namespace Battleships.ViewModel.Page
 
         private static MainPageViewModel _instance;
 
-        public static ViewModelBase Instance
+        public static MainPageViewModel Instance
         {
             get
             {

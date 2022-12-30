@@ -10,20 +10,10 @@ namespace Battleships.ViewModel.Page
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private static PlayAgainstPlayerViewModel _instance;
-
-        public static PlayPageViewModel Instance
+        public PlayAgainstPlayerViewModel(string player1Name, string player2Name)
         {
-            get
-            {
-                _instance ??= new PlayAgainstPlayerViewModel();
-
-                return _instance;
-            }
-        }
-
-        public PlayAgainstPlayerViewModel() : base()
-        {
+            Player1Model.Player.Name = player1Name;
+            Player2Model.Player.Name = player2Name;
         }
 
         public override void ExecuteTileClick(object parameter)

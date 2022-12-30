@@ -10,20 +10,12 @@ namespace Battleships.ViewModel.Page
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private static PlayAgainstAIViewModel _instance;
-        public static PlayPageViewModel Instance
+        public PlayAgainstAIViewModel(string player1Name)
         {
-            get
-            {
-                _instance ??= new PlayAgainstAIViewModel();
-
-                return _instance;
-            }
-        }
-        public PlayAgainstAIViewModel() : base()
-        {
+            Player1Model.Player.Name = player1Name;
             Player2Model.Player.Name = "Robot kapitány";
         }
+
         public override void ExecuteTileClick(object parameter)
         {
             var mouseArguments = parameter as MouseButtonEventArgs;

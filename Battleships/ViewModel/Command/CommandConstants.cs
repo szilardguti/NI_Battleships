@@ -25,21 +25,25 @@ namespace Battleships.ViewModel.Command
             }
         }
 
-        private static readonly NavigationCommand _navigateToPlayerAgainstPlayerPage = new NavigationCommand(PlayAgainstPlayerViewModel.Instance);
-        public static ICommand NavigateToPlayerAgainstPlayerPage
+        public static NavigationCommand NavigateToPlayerAgainstPlayerPage
         {
             get
             {
-                return _navigateToPlayerAgainstPlayerPage;
+                PlayPageViewModel viewModel = new PlayAgainstPlayerViewModel(
+                    MainPageViewModel.Instance.Player1Name,
+                    MainPageViewModel.Instance.Player2Name);
+
+                return new NavigationCommand(viewModel);
             }
         }
 
-        private static readonly NavigationCommand _navigateToPlayerAgainstAIPage = new NavigationCommand(PlayAgainstAIViewModel.Instance);
-        public static ICommand NavigateToPlayerAgainstAIPage
+        public static NavigationCommand NavigateToPlayerAgainstAIPage
         {
             get
             {
-                return _navigateToPlayerAgainstAIPage;
+                PlayPageViewModel viewModel = new PlayAgainstAIViewModel(MainPageViewModel.Instance.Player1Name);
+
+                return new NavigationCommand(viewModel);
             }
         }
     }
