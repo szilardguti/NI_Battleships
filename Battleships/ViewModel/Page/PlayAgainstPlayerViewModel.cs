@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleships.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -19,6 +20,16 @@ namespace Battleships.ViewModel.Page
 
                 return _instance;
             }
+        }
+
+        public override void NextPlayer(object parameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ExecuteTileClick(object parameter)
+        {
+            throw new NotImplementedException();
         }
     }
 }

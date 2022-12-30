@@ -19,15 +19,9 @@ namespace Battleships.ViewModel.Page
         private static PlayAgainstAIViewModel _instance;
         private PlayBoardModel _playerModel;
         private PlayBoardModel _aiModel;
-        private ICommand _mouseDownCommand;
-        private ICommand _nextPlayerCommand;
 
-        private int _currentPlayer = 1;
-        private bool _canShoot = true;
-        private int _winner = 0;
-
-        public ObservableCollection<TileItem> FirstPlayerTileItems { get; set; }
-        public ObservableCollection<TileItem> SecondPlayerTileItems { get; set; }
+        public PlayBoardModel PlayerModel { get { return _playerModel; } }
+        public PlayBoardModel AIModel { get { return _aiModel; } }
 
         public static PlayPageViewModel Instance
         {
@@ -39,92 +33,15 @@ namespace Battleships.ViewModel.Page
             }
         }
 
-        public PlayAgainstAIViewModel()
+        public PlayAgainstAIViewModel() : base()
         {
             _playerModel = new PlayBoardModel();
             _aiModel = new PlayBoardModel();
 
-            _mouseDownCommand = new CommandBase(ExecuteTileClick);
-            _nextPlayerCommand = new CommandBase(NextPlayer);
-            FirstPlayerTileItems = new ObservableCollection<TileItem>();
-            SecondPlayerTileItems = new ObservableCollection<TileItem>();
             DrawPlayBoardToCanvas(PlayerModel, FirstPlayerTileItems);
             DrawOtherPlayBoardToCanvas(AIModel, SecondPlayerTileItems);
         }
-
-        private void DrawPlayBoardToCanvas(PlayBoardModel playBoard, ObservableCollection<TileItem> tileItems)
-        {
-            tileItems.Clear();
-
-            foreach (Tile tile in playBoard.Tiles)
-            {
-                TileItem newTileItem = new TileItem
-                {
-                    X = tile.X * 30,
-                    Y = tile.Y * 30,
-                    Height = 30,
-                    Width = 30,
-                    Color = tile.TileStatus switch
-                    {
-                        TileStatus.Empty => Brushes.Aqua,
-                        TileStatus.Ship => Brushes.DarkGray,
-                        TileStatus.MissShot => Brushes.Black,
-                        TileStatus.HitShot => Brushes.Yellow,
-                        TileStatus.Destroyed=> Brushes.Red,
-                        _ => Brushes.White,
-                    }
-                };
-                tileItems.Add(newTileItem);
-            }
-        }
-
-        private void DrawOtherPlayBoardToCanvas(PlayBoardModel playBoard, ObservableCollection<TileItem> tileItems)
-        {
-            tileItems.Clear();
-
-            foreach (Tile tile in playBoard.Tiles)
-            {
-                TileItem newTileItem = new TileItem
-                {
-                    X = tile.X * 30,
-                    Y = tile.Y * 30,
-                    Height = 30,
-                    Width = 30,
-                    Color = tile.TileStatus switch
-                    {
-                        TileStatus.Empty => Brushes.Aqua,
-                        TileStatus.Ship => Brushes.Aqua,
-                        TileStatus.MissShot => Brushes.Black,
-                        TileStatus.HitShot => Brushes.Yellow,
-                        TileStatus.Destroyed=> Brushes.Red,
-                        _ => Brushes.White,
-                    }
-                };
-                tileItems.Add(newTileItem);
-            }
-        }
-        public int Winner
-        {
-            get { return _winner; }
-            set { _winner = value; }
-        }
-        public int CurrentPlayer
-        { 
-            get { return _currentPlayer; }
-            set { _currentPlayer = value; }
-        }
-
-        public bool CanShoot
-        {
-            get { return _canShoot; }
-            set { _canShoot = value; }
-        }
-        public PlayBoardModel PlayerModel { get { return _playerModel; } }
-        public PlayBoardModel AIModel { get { return _aiModel; } }
-        public ICommand MouseDownCommand { get { return _mouseDownCommand; } }
-        public ICommand NextPlayerCommand { get { return _nextPlayerCommand; } }
-
-        public void ExecuteTileClick(object parameter)
+        public override void ExecuteTileClick(object parameter)
         {
             var mouseArguments = parameter as MouseButtonEventArgs;
             var point = mouseArguments.GetPosition((IInputElement)mouseArguments.Source);
@@ -170,7 +87,7 @@ namespace Battleships.ViewModel.Page
             }
         }
 
-        public void NextPlayer(object parameter)
+        public override void NextPlayer(object parameter)
         {
             if (!CanShoot)
             {
