@@ -214,5 +214,23 @@
             <TextBlock Grid.Column="9" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Height="19" Width="8"
                        Text="{Binding Player2Model.Player.DestroyerCount}"/>
         </Grid>
+
+        <Grid Visibility="{Binding NameIOVisibility}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"
+                Text="Input Player1 name:" 
+                FontSize="14" 
+                FontWeight="DemiBold" 
+                VerticalAlignment="Center" HorizontalAlignment="Right" 
+                Margin="0,0,10,0"/>
+            <TextBox Grid.Column="1"
+                     FontSize="14" 
+                     Height="18"
+                     Margin="5,0,40,0"
+                     />
+        </Grid>
     </Grid>
 </Page>

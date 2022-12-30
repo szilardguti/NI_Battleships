@@ -30,6 +30,14 @@ namespace Battleships.ViewModel.Page
             }
         }
 
+        public Visibility NameIOVisibility
+        {
+            get
+            {
+                return _readyToPlay ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
         private int _rounds = 1;
         public int Rounds { get { return _rounds; } set { _rounds = value; } }
 
