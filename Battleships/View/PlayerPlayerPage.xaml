@@ -232,19 +232,19 @@
 
             <TextBlock FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Carrier:" Height="19" Width="44"/>
             <TextBlock Grid.Column="1" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Height="19" Width="7"
-                       Text="{Binding Player1Model.Player.CarrierCount}" />
+                       Text="{Binding Path=Player1Model.Player.CarrierCount}" />
             <TextBlock Grid.Column="2" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="BattleShip:" Height="19" Width="66"/>
             <TextBlock Grid.Column="2" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="19" Margin="74,0,0,0" Width="8"
-                       Text="{Binding Player1Model.Player.BattleshipCount}" />
+                       Text="{Binding Path=Player1Model.Player.BattleshipCount}" />
             <TextBlock Grid.Column="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Cruiser:" Height="19" Width="46"/>
             <TextBlock Grid.Column="4" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="19" Margin="53,0,0,0" Width="8"
-                       Text="{Binding Player1Model.Player.CruiserCount}" />
+                       Text="{Binding Path=Player1Model.Player.CruiserCount}" />
             <TextBlock Grid.Column="6" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Submarine:" Height="19" Width="69"/>
             <TextBlock Grid.Column="7" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Height="19" Width="7"
-                       Text="{Binding Player1Model.Player.SubmarineCount}"/>
+                       Text="{Binding Path=Player1Model.Player.SubmarineCount}"/>
             <TextBlock Grid.Column="8" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Destroyer:" Height="19" Width="63"/>
             <TextBlock Grid.Column="9" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Height="19" Width="8"
-                       Text="{Binding Player1Model.Player.DestroyerCount}"/>
+                       Text="{Binding Path=Player1Model.Player.DestroyerCount}"/>
         </Grid>
 
         <Button
@@ -300,19 +300,19 @@
 
             <TextBlock FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Carrier:" Height="19" Width="44"/>
             <TextBlock Grid.Column="1" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Height="19" Width="7"
-                       Text="{Binding Player2Model.Player.CarrierCount}" />
+                       Text="{Binding Path=Player2Model.Player.CarrierCount}" />
             <TextBlock Grid.Column="2" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="BattleShip:" Height="19" Width="66"/>
             <TextBlock Grid.Column="2" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="19" Margin="74,0,0,0" Width="8"
-                       Text="{Binding Player2Model.Player.BattleshipCount}" />
+                       Text="{Binding Path=Player2Model.Player.BattleshipCount}" />
             <TextBlock Grid.Column="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Cruiser:" Height="19" Width="46"/>
             <TextBlock Grid.Column="4" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="19" Margin="53,0,0,0" Width="8"
-                       Text="{Binding Player2Model.Player.CruiserCount}" />
+                       Text="{Binding Path=Player2Model.Player.CruiserCount}" />
             <TextBlock Grid.Column="6" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Submarine:" Height="19" Width="69"/>
             <TextBlock Grid.Column="7" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Height="19" Width="7"
-                       Text="{Binding Player2Model.Player.SubmarineCount}"/>
+                       Text="{Binding Path=Player2Model.Player.SubmarineCount}"/>
             <TextBlock Grid.Column="8" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Destroyer:" Height="19" Width="63"/>
             <TextBlock Grid.Column="9" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Height="19" Width="8"
-                       Text="{Binding Player2Model.Player.DestroyerCount}"/>
+                       Text="{Binding Path=Player2Model.Player.DestroyerCount}"/>
         </Grid>
 
         <Grid Visibility="{Binding NameIOVisibility}">
