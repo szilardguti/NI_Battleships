@@ -8,6 +8,8 @@ namespace Battleships.Model
 {
     public class PlayBoardModel
     {
+        public PlayerModel Player { get; set; }
+
         public Collection<Tile> Tiles { get; set; }
 
         public Collection<ShipModel> Ships { get; set; }
