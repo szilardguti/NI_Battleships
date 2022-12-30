@@ -37,7 +37,7 @@ namespace Battleships.Services.AIService
                 }
                 if (unfinishedShipTile.Y != 0)
                 {
-                    Tile currentTile = enemyPlayBoard.GetTile(unfinishedShipTile.X, unfinishedShipTile.Y + 1);
+                    Tile currentTile = enemyPlayBoard.GetTile(unfinishedShipTile.X, unfinishedShipTile.Y - 1);
                     if (currentTile.TileStatus != TileStatus.MissShot &&
                         currentTile.TileStatus != TileStatus.HitShot &&
                         currentTile.TileStatus != TileStatus.Destroyed)
@@ -47,7 +47,7 @@ namespace Battleships.Services.AIService
                 }
                 if (unfinishedShipTile.Y != Constants.PlayerBoardSize - 1)
                 {
-                    Tile currentTile = enemyPlayBoard.GetTile(unfinishedShipTile.X, unfinishedShipTile.Y - 1);
+                    Tile currentTile = enemyPlayBoard.GetTile(unfinishedShipTile.X, unfinishedShipTile.Y + 1);
                     if (currentTile.TileStatus != TileStatus.MissShot &&
                         currentTile.TileStatus != TileStatus.HitShot &&
                         currentTile.TileStatus != TileStatus.Destroyed)
