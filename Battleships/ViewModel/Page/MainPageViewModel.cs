@@ -24,6 +24,8 @@ namespace Battleships.ViewModel.Page
 
         private ICommand _navigateToPlayerAgainstAIPage;
 
+        private ICommand _navigateToPlayerAgainstPlayerPage;
+
         public ICommand NavigateToHistoryPage
         {
             get
@@ -48,10 +50,23 @@ namespace Battleships.ViewModel.Page
             }
         }
 
+        public ICommand NavigateToPlayerAgainstPlayerPage
+        {
+            get
+            {
+                return _navigateToPlayerAgainstPlayerPage;
+            }
+            set
+            {
+                _navigateToPlayerAgainstPlayerPage = value;
+            }
+        }
+
         public MainPageViewModel()
         {
             NavigateToHistoryPage = CommandConstants.NavigateToHistoryPage;
             NavigateToPlayerAgainstAIPage = CommandConstants.NavigateToPlayerAgainstAIPage;
+            NavigateToPlayerAgainstPlayerPage = CommandConstants.NavigateToPlayerAgainstPlayerPage;
         }
     }
 }
