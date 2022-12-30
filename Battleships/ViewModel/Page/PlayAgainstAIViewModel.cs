@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Battleships.Model;
@@ -23,6 +24,7 @@ namespace Battleships.ViewModel.Page
 
         private int _currentPlayer = 1;
         private bool _canShoot = true;
+        private int _winner = 0;
 
         public ObservableCollection<TileItem> FirstPlayerTileItems { get; set; }
         public ObservableCollection<TileItem> SecondPlayerTileItems { get; set; }
@@ -101,7 +103,11 @@ namespace Battleships.ViewModel.Page
                 tileItems.Add(newTileItem);
             }
         }
-
+        public int Winner
+        {
+            get { return _winner; }
+            set { _winner = value; }
+        }
         public int CurrentPlayer
         { 
             get { return _currentPlayer; }
@@ -126,7 +132,7 @@ namespace Battleships.ViewModel.Page
             int xIndex = (int)point.X / 30;
             int yIndex = (int)point.Y / 30;
 
-            if (CanShoot)
+            if (CanShoot && Winner == 0)
             {
 
                 if (CurrentPlayer == 1)
@@ -134,7 +140,7 @@ namespace Battleships.ViewModel.Page
                     TileStatus status = AIModel.GetTile(xIndex, yIndex).TileStatus;
                     if (status == TileStatus.Ship)
                     {
-                        AIModel.Hit(xIndex, yIndex);
+                        Winner = AIModel.Hit(xIndex, yIndex) ? 1 : 0;
                     }
                     else if (status == TileStatus.Empty)
                     {
@@ -150,7 +156,7 @@ namespace Battleships.ViewModel.Page
                     TileStatus status = PlayerModel.GetTile(xIndex, yIndex).TileStatus;
                     if (status == TileStatus.Ship)
                     {
-                        PlayerModel.Hit(xIndex, yIndex);
+                        Winner = PlayerModel.Hit(xIndex, yIndex) ? 2 : 0;
                     }
                     else if (status == TileStatus.Empty)
                     {

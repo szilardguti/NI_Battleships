@@ -28,7 +28,7 @@ namespace Battleships.Model
             Tiles.FirstOrDefault(tile => tile.X == rowIndex && tile.Y == colIndex).TileStatus = tileStatus;
         }
 
-        public void Hit(int x, int y)
+        public bool Hit(int x, int y)
         {
             SetTile(x, y, TileStatus.HitShot);
 
@@ -45,8 +45,17 @@ namespace Battleships.Model
                     {
                         tile.TileStatus = TileStatus.MissShot;
                     }
+                    if (Lost())
+                    {
+                        return true;
+                    }
                 }
             }
+            return false;
+        }
+        private bool Lost()
+        {
+            return !Ships.Any(ship => ship.Health > 0);
         }
 
         public void Miss(int x, int y)
@@ -75,7 +84,7 @@ namespace Battleships.Model
             {
                 foreach (Tile adjacent in GetAdjacentTilesForTile(tile))
                 {
-                    if (adjacent.TileStatus == TileStatus.Empty)
+                    if (adjacent?.TileStatus == TileStatus.Empty)
                     {
                         tiles.Add(adjacent);
                     }
