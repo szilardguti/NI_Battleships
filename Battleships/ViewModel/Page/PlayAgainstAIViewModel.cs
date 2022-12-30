@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using Battleships.Model;
 using Battleships.Model.Helpers;
+using Battleships.ViewModel.Command;
 
 namespace Battleships.ViewModel.Page
 {
@@ -14,6 +18,7 @@ namespace Battleships.ViewModel.Page
         private static PlayAgainstAIViewModel _instance;
         private PlayBoardModel _playerModel;
         private PlayBoardModel _aiModel;
+        private ICommand _mouseDownCommand;
 
         public ObservableCollection<TileItem> FirstPlayerTileItems { get; set; }
 
@@ -31,9 +36,10 @@ namespace Battleships.ViewModel.Page
         {
             _playerModel = new PlayBoardModel();
             _aiModel = new PlayBoardModel();
-            PlayBoard = new PlayBoardModel();
-            FirstPlayerTileItems= new ObservableCollection<TileItem>();
-            DrawPlayBoardToCanvas(PlayBoard, FirstPlayerTileItems);
+
+            _mouseDownCommand = new CommandBase(ExecuteTileClick);
+            FirstPlayerTileItems = new ObservableCollection<TileItem>();
+            DrawPlayBoardToCanvas(PlayerModel, FirstPlayerTileItems);
         }
 
         private void DrawPlayBoardToCanvas(PlayBoardModel playBoard, ObservableCollection<TileItem> tileItems)
@@ -63,7 +69,26 @@ namespace Battleships.ViewModel.Page
 
         public PlayBoardModel PlayerModel { get { return _playerModel; } }
         public PlayBoardModel AIModel { get { return _aiModel; } }
+        public ICommand MouseDownCommand { get { return _mouseDownCommand; } }
 
-        public PlayBoardModel PlayBoard { get; set; }
+        public void ExecuteTileClick(object parameter)
+        {
+            var mouseArguments = parameter as MouseButtonEventArgs;
+            var point = mouseArguments.GetPosition((IInputElement)mouseArguments.Source);
+
+            int xIndex = (int)point.X / 30;
+            int yIndex = (int)point.Y / 30;
+
+            if (PlayerModel.GetTile(xIndex, yIndex).TileStatus == TileStatus.Ship)
+            {
+                PlayerModel.SetTile(xIndex, yIndex, TileStatus.HitShot);
+            }
+            else
+            {
+                PlayerModel.SetTile(xIndex, yIndex, TileStatus.MissShot);
+            }
+
+            DrawPlayBoardToCanvas(PlayerModel, FirstPlayerTileItems);
+        }
     }
 }
