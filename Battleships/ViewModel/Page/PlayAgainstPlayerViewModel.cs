@@ -50,6 +50,7 @@ namespace Battleships.ViewModel.Page
 
                         if (winAndDestroy.Item2)
                         {
+                            OnPropertyChanged(nameof(Player1Model.Player.HitCount));
                             OnPropertyChanged(nameof(Player2Model.Player.CarrierCount));
                             OnPropertyChanged(nameof(Player2Model.Player.SubmarineCount));
                             OnPropertyChanged(nameof(Player2Model.Player.DestroyerCount));
@@ -79,11 +80,12 @@ namespace Battleships.ViewModel.Page
 
                         if (winAndDestroy.Item2)
                         {
-                            OnPropertyChanged(nameof(Player2Model.Player.CarrierCount));
-                            OnPropertyChanged(nameof(Player2Model.Player.SubmarineCount));
-                            OnPropertyChanged(nameof(Player2Model.Player.DestroyerCount));
-                            OnPropertyChanged(nameof(Player2Model.Player.BattleshipCount));
-                            OnPropertyChanged(nameof(Player2Model.Player.CruiserCount));
+                            OnPropertyChanged(nameof(Player2Model.Player.HitCount));
+                            OnPropertyChanged(nameof(Player1Model.Player.CarrierCount));
+                            OnPropertyChanged(nameof(Player1Model.Player.SubmarineCount));
+                            OnPropertyChanged(nameof(Player1Model.Player.DestroyerCount));
+                            OnPropertyChanged(nameof(Player1Model.Player.BattleshipCount));
+                            OnPropertyChanged(nameof(Player1Model.Player.CruiserCount));
                         }
 
                     }
