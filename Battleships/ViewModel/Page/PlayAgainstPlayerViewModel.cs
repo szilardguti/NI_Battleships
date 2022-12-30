@@ -36,7 +36,6 @@ namespace Battleships.ViewModel.Page
 
             if (CanShoot && Winner == 0)
             {
-
                 if (CurrentPlayer == 1)
                 {
                     TileStatus status = Player2Model.GetTile(xIndex, yIndex).TileStatus;
@@ -85,7 +84,6 @@ namespace Battleships.ViewModel.Page
                             OnPropertyChanged(nameof(Player1Model.Player.BattleshipCount));
                             OnPropertyChanged(nameof(Player1Model.Player.CruiserCount));
                         }
-
                     }
                     else if (status == TileStatus.Empty)
                     {
@@ -114,6 +112,8 @@ namespace Battleships.ViewModel.Page
                     DrawOtherPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
                 }
                 CanShoot = true;
+                Rounds += 1;
+                OnPropertyChanged(nameof(Rounds));
             }
         }
     }
