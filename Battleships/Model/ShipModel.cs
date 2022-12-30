@@ -17,6 +17,8 @@ namespace Battleships.Model
 
         public bool IsVertical { get; set; }
 
+        public bool IsDestroyed { get; set; }
+
         private Collection<Tile> _positions;
 
         public Collection<Tile> Positions

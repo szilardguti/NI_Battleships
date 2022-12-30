@@ -49,7 +49,7 @@ namespace Battleships.Model
                 {
                     ship.Health--;
                 }
-                if (ship.Health == 0)
+                if (ship.Health == 0 && !ship.IsDestroyed)
                 {
                     DestroyShip(ship);
                     destroy = true;
@@ -86,6 +86,7 @@ namespace Battleships.Model
             {
                 SetTile(tile.X, tile.Y, TileStatus.Destroyed);
             }
+            ship.IsDestroyed = true;
 
             switch (ship.Name)
             {
@@ -166,11 +167,11 @@ namespace Battleships.Model
             Ships = null;
             Ships = new Collection<ShipModel>
             {
-                new ShipModel() { Name = Constants.ShipSize5Name, Length = 5, Health = 5, IsVertical = false },
-                new ShipModel() { Name = Constants.ShipSize4Name, Length = 4, Health = 4, IsVertical = false },
-                new ShipModel() { Name = Constants.ShipSize3Name1, Length = 3, Health = 3, IsVertical = true },
-                new ShipModel() { Name = Constants.ShipSize3Name2, Length = 3, Health = 3, IsVertical = true },
-                new ShipModel() { Name = Constants.ShipSize2Name, Length = 2, Health = 2, IsVertical = true }
+                new ShipModel() { Name = Constants.ShipSize5Name, Length = 5, Health = 5, IsVertical = false, IsDestroyed = false },
+                new ShipModel() { Name = Constants.ShipSize4Name, Length = 4, Health = 4, IsVertical = false, IsDestroyed = false },
+                new ShipModel() { Name = Constants.ShipSize3Name1, Length = 3, Health = 3, IsVertical = true, IsDestroyed = false },
+                new ShipModel() { Name = Constants.ShipSize3Name2, Length = 3, Health = 3, IsVertical = true, IsDestroyed = false },
+                new ShipModel() { Name = Constants.ShipSize2Name, Length = 2, Health = 2, IsVertical = true, IsDestroyed = false }
             };
         }
 
