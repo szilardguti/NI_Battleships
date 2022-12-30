@@ -10,9 +10,9 @@ namespace Battleships.ViewModel.Page
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public PlayAgainstAIViewModel(string player1Name)
+        public PlayAgainstAIViewModel()
         {
-            Player1Model.Player.Name = player1Name;
+            Player1Model.Player.Name = string.Empty;
             Player2Model.Player.Name = "Robot kapitány";
         }
 
