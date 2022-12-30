@@ -284,8 +284,17 @@ namespace Battleships.ViewModel.Page
                 Player1Ready = true;
             }
 
-            OnPropertyChanged(nameof(PlayElementsVisibility));
-            OnPropertyChanged(nameof(NameIOVisibility));
+            if (ReadyToPlay)
+            {
+                OnPropertyChanged(nameof(PlayElementsVisibility));
+                OnPropertyChanged(nameof(NameIOVisibility));
+
+                OnPropertyChanged(nameof(Player1Model.Player.CarrierCount));
+                OnPropertyChanged(nameof(Player1Model.Player.BattleshipCount));
+                OnPropertyChanged(nameof(Player1Model.Player.SubmarineCount));
+                OnPropertyChanged(nameof(Player1Model.Player.CruiserCount));
+                OnPropertyChanged(nameof(Player1Model.Player.DestroyerCount));
+            }
         }
 
         public void ExecutePlayer2Submit(object parameter)
@@ -295,8 +304,17 @@ namespace Battleships.ViewModel.Page
                 Player2Ready = true;
             }
 
-            OnPropertyChanged(nameof(PlayElementsVisibility));
-            OnPropertyChanged(nameof(NameIOVisibility));
+            if (ReadyToPlay)
+            {
+                OnPropertyChanged(nameof(PlayElementsVisibility));
+                OnPropertyChanged(nameof(NameIOVisibility));
+
+                OnPropertyChanged(nameof(Player2Model.Player.CarrierCount));
+                OnPropertyChanged(nameof(Player2Model.Player.BattleshipCount));
+                OnPropertyChanged(nameof(Player2Model.Player.SubmarineCount));
+                OnPropertyChanged(nameof(Player2Model.Player.CruiserCount));
+                OnPropertyChanged(nameof(Player2Model.Player.DestroyerCount));
+            }
         }
 
         private bool RegexMatch(string playerName)
