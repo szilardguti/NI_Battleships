@@ -42,6 +42,7 @@
             Grid.Row="2" 
             Width="140"
             Height="60"
+            Command="{Binding NavigateToPlayerAgainstAIPage}"
             >
             <Button.Style>
                 <Style TargetType="Button">

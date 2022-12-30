@@ -13,7 +13,7 @@
     <Page.DataContext>
         <vmp:PlayAgainstAIViewModel/>
     </Page.DataContext>
-    <Grid>
+    <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7*"/>
             <ColumnDefinition/>
@@ -24,6 +24,38 @@
             <RowDefinition Height="32*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="1" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="300"/>
+            </Grid.RowDefinitions>
+
+            <ItemsControl Grid.Column="1" Grid.Row="1" ItemsSource="{Binding FirstPlayerTileItems}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="{Binding Color}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </Grid>
+        
         <StackPanel Grid.Column="1" Grid.Row="1" Background="Black" Width="2"/>
 
         <TextBlock Grid.Column="0" Grid.Row="0"  
