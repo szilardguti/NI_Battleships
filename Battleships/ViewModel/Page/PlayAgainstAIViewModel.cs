@@ -7,13 +7,13 @@ using System.Windows.Input;
 using Battleships.Model;
 using Battleships.Model.Helpers;
 using Battleships.Services.AIService;
+using Battleships.ViewModel.Command;
 
 namespace Battleships.ViewModel.Page
 {
     public class PlayAgainstAIViewModel : PlayPageViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
         public PlayAgainstAIViewModel() : base()
         {
             Player1Model.Player.Name = string.Empty;
@@ -58,6 +58,14 @@ namespace Battleships.ViewModel.Page
             while (CanShoot);
 
             NextPlayer(null);
+        }
+
+        public void OnCombination(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.K)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

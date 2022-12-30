@@ -20,6 +20,7 @@ namespace Battleships.ViewModel.Page
             _nextPlayerCommand = new CommandBase(NextPlayer);
             _submitPlayer1Name = new CommandBase(ExecutePlayer1Submit);
             _submitPlayer2Name = new CommandBase(ExecutePlayer2Submit);
+            _showAIBoard = new CommandBase(ExecuteShowAIBoard);
             FirstPlayerTileItems = new ObservableCollection<TileItem>();
             SecondPlayerTileItems = new ObservableCollection<TileItem>();
             DrawPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
@@ -273,7 +274,9 @@ namespace Battleships.ViewModel.Page
 
         private readonly ICommand _submitPlayer1Name;
         private readonly ICommand _submitPlayer2Name;
+        private readonly ICommand _showAIBoard;
 
+        public ICommand ShowAIBoard { get { return _showAIBoard; } }
         public ICommand SubmitPlayer1Name { get { return _submitPlayer1Name; } }
         public ICommand SubmitPlayer2Name { get { return _submitPlayer2Name; } }
 
@@ -286,6 +289,11 @@ namespace Battleships.ViewModel.Page
 
             if (ReadyToPlay)
             {
+                Player1Model.Player.DestroyerCount = 1;
+                Player1Model.Player.SubmarineCount = 1;
+                Player1Model.Player.CarrierCount = 1;
+                Player1Model.Player.BattleshipCount = 1;
+                Player1Model.Player.CruiserCount = 1;
                 OnPropertyChanged(nameof(PlayElementsVisibility));
                 OnPropertyChanged(nameof(NameIOVisibility));
 
@@ -306,6 +314,12 @@ namespace Battleships.ViewModel.Page
 
             if (ReadyToPlay)
             {
+                Player2Model.Player.DestroyerCount = 1;
+                Player2Model.Player.SubmarineCount = 1;
+                Player2Model.Player.CarrierCount = 1;
+                Player2Model.Player.BattleshipCount = 1;
+                Player2Model.Player.CruiserCount = 1;
+
                 OnPropertyChanged(nameof(PlayElementsVisibility));
                 OnPropertyChanged(nameof(NameIOVisibility));
 
@@ -314,6 +328,14 @@ namespace Battleships.ViewModel.Page
                 OnPropertyChanged(nameof(Player2Model.Player.SubmarineCount));
                 OnPropertyChanged(nameof(Player2Model.Player.CruiserCount));
                 OnPropertyChanged(nameof(Player2Model.Player.DestroyerCount));
+            }
+        }
+
+        public void ExecuteShowAIBoard(object parameter)
+        {
+            if (CurrentPlayer == 1)
+            {
+                DrawPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
             }
         }
 
