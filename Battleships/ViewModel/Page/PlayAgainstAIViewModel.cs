@@ -21,7 +21,7 @@ namespace Battleships.ViewModel.Page
         }
         public PlayAgainstAIViewModel() : base()
         {
-            Player2Name = "Robot kapitány";
+            Player2Model.Player.Name = "Robot kapitány";
         }
         public override void ExecuteTileClick(object parameter)
         {
