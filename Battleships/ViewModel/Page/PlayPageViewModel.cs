@@ -109,12 +109,28 @@ namespace Battleships.ViewModel.Page
             }
         }
 
+        public Visibility Player1ReadyVisibility
+        {
+            get
+            {
+                return (_player1Ready && !_readyToPlay) ? Visibility.Visible : Visibility.Hidden;
+            }
+        }
+        public Visibility Player2ReadyVisibility
+        {
+            get
+            {
+                return (_player2Ready && !_readyToPlay) ? Visibility.Visible : Visibility.Hidden;
+            }
+        }
+
         private int _rounds = 1;
         public int Rounds { get { return _rounds; } set { _rounds = value; } }
 
         private int _winner = 0;
         private int _currentPlayer = 1;
         private bool _canShoot = true;
+        private int _startingPlayer = 1;
         public int Winner
         {
             get { return _winner; }
@@ -124,6 +140,12 @@ namespace Battleships.ViewModel.Page
         {
             get { return _currentPlayer; }
             set { _currentPlayer = value; }
+        }
+
+        public int StartingPlayer
+        {
+            get { return _startingPlayer; }
+            set { _startingPlayer = value; }
         }
 
         public bool CanShoot
@@ -193,14 +215,16 @@ namespace Battleships.ViewModel.Page
                 {
                     DrawPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
                     DrawOtherPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
-                    Rounds += 1;
-                    OnPropertyChanged(nameof(Rounds));
+                    if (StartingPlayer == 1)
+                    {
+                        Rounds++;
+                        OnPropertyChanged(nameof(Rounds));
+                    }
                 }
                 else
                 {
                     DrawPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
                     DrawOtherPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
-
                     if (Player2Model.Player.IsARobot)
                     {
                         RobotPlay();
@@ -239,6 +263,11 @@ namespace Battleships.ViewModel.Page
                     {
                         Player2Model.Miss(xIndex, yIndex);
                         CurrentPlayer = 2;
+                        if (StartingPlayer == 2)
+                        {
+                            Rounds++;
+                            OnPropertyChanged(nameof(Rounds));
+                        }
                         CanShoot = false;
                     }
 
@@ -344,12 +373,34 @@ namespace Battleships.ViewModel.Page
                 _player1FormatError = true;
             }
 
+            if (ReadyToPlay)
+            {
+                StartGame();
+            }
+
+            OnPropertyChanged(nameof(Player1ReadyVisibility));
             OnPropertyChanged(nameof(Player1FormatErrorVisibility));
+        }
+
+        public void ExecutePlayer2Submit(object parameter)
+        {
+            if (RegexMatch(Player2Model.Player.Name))
+            {
+                Player2Ready = true;
+                _player2FormatError = false;
+            }
+            else
+            {
+                _player2FormatError = true;
+            }
 
             if (ReadyToPlay)
             {
                 StartGame();
             }
+
+            OnPropertyChanged(nameof(Player2ReadyVisibility));
+            OnPropertyChanged(nameof(Player2FormatErrorVisibility));
         }
 
         private void StartGame()
@@ -369,8 +420,18 @@ namespace Battleships.ViewModel.Page
             OnPropertyChanged(nameof(PlayElementsVisibility));
             OnPropertyChanged(nameof(NameIOVisibility));
 
+            CurrentPlayer = new Random().Next(0, 2) == 0 ? 1 : 2;
+            StartingPlayer = CurrentPlayer;
+            if (CurrentPlayer == 2 && Player2Model.Player.IsARobot)
+            {
+                RobotPlay();
+            }
+
             UpdatePlayer1Properties();
             UpdatePlayer2Properties();
+
+            OnPropertyChanged(nameof(Player1ReadyVisibility));
+            OnPropertyChanged(nameof(Player2ReadyVisibility));
 
             MatchResult = CreateGameResultInDatabase(Player1Model, Player2Model);
         }
@@ -440,26 +501,6 @@ namespace Battleships.ViewModel.Page
             gameAction.ActionString = string.Concat(firstChar, yIndex + 1);
 
             ResultRepository.AddActionToGame(gameAction);
-        }
-
-        public void ExecutePlayer2Submit(object parameter)
-        {
-            if (RegexMatch(Player2Model.Player.Name))
-            {
-                Player2Ready = true;
-                _player2FormatError = false;
-            }
-            else
-            {
-                _player2FormatError = true;
-            }
-
-            OnPropertyChanged(nameof(Player2FormatErrorVisibility));
-
-            if (ReadyToPlay)
-            {
-                StartGame();
-            }
         }
 
         public void ExecuteShowAIBoard(object parameter)
