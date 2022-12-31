@@ -4,11 +4,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 using Battleships.DAL;
 using Battleships.DAL.Entities;
 using Battleships.Model;
 using Battleships.Model.Helpers;
+using Battleships.ViewModel.Command;
 
 namespace Battleships.ViewModel.Page
 {
@@ -23,12 +25,15 @@ namespace Battleships.ViewModel.Page
         public ObservableCollection<TileItem> FirstPlayerTileItems { get; set; }
         public ObservableCollection<TileItem> SecondPlayerTileItems { get; set; }
 
-        public int Round { get; set; }
-
         private ResultRepository ResultRepository { get; set; }
+
+        private readonly ICommand _selectActionInHistory;
+        public ICommand SelectActionInHistory { get { return _selectActionInHistory; } }
 
         public MatchHistoryPageViewModel()
         {
+            _selectActionInHistory = new CommandBase(LoadSelectedAction);
+
             HistoryGameResult = HistoryPageViewModel.PickedGameHistory;
             SetupPlayerModels();
 
@@ -65,6 +70,14 @@ namespace Battleships.ViewModel.Page
         {
             OnPropertyChanged(nameof(Player1Model));
             OnPropertyChanged(nameof(Player2Model));
+        }
+
+        private void LoadSelectedAction(object parameter)
+        {
+            if (parameter is GameAction action)
+            {
+                ShowAction(action);
+            }
         }
 
         public void DrawPlayBoardToCanvas(PlayBoardModel playBoard, ObservableCollection<TileItem> tileItems)
