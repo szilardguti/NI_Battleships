@@ -145,7 +145,7 @@ namespace Battleships.ViewModel.Page
                     case 2:
                         winnerName = Player2Model.Player.Name;
                         break;
-                    case 0: 
+                    case 0:
                         return winnerName;
                 }
 
@@ -227,19 +227,14 @@ namespace Battleships.ViewModel.Page
                         Winner = winAndDestroy.Item1 ? 1 : 0;
 
                         Player1Model.Player.HitCount += 1;
-                        OnPropertyChanged(nameof(Player1Model.Player.HitCount));
+                        OnPropertyChanged("Player1Model.Player.HitCount");
 
                         if (winAndDestroy.Item2)
                         {
-                            OnPropertyChanged(nameof(Player2Model.Player.CarrierCount));
-                            OnPropertyChanged(nameof(Player2Model.Player.SubmarineCount));
-                            OnPropertyChanged(nameof(Player2Model.Player.DestroyerCount));
-                            OnPropertyChanged(nameof(Player2Model.Player.BattleshipCount));
-                            OnPropertyChanged(nameof(Player2Model.Player.CruiserCount));
+                            UpdatePlayer2ShipProperties();
                         }
 
-                        OnPropertyChanged(nameof(WinnerName));
-                        OnPropertyChanged(nameof(WinPanelVisibility));
+                        UpdateWinStateProperties();
                     }
                     else if (status == TileStatus.Empty)
                     {
@@ -259,19 +254,14 @@ namespace Battleships.ViewModel.Page
                         Winner = winAndDestroy.Item1 ? 2 : 0;
 
                         Player2Model.Player.HitCount += 1;
-                        OnPropertyChanged(nameof(Player2Model.Player.HitCount));
+                        OnPropertyChanged("Player2Model.Player.HitCount");
 
                         if (winAndDestroy.Item2)
                         {
-                            OnPropertyChanged(nameof(Player1Model.Player.CarrierCount));
-                            OnPropertyChanged(nameof(Player1Model.Player.BattleshipCount));
-                            OnPropertyChanged(nameof(Player1Model.Player.SubmarineCount));
-                            OnPropertyChanged(nameof(Player1Model.Player.CruiserCount));
-                            OnPropertyChanged(nameof(Player1Model.Player.DestroyerCount));
+                            UpdatePlayer1ShipProperties();
                         }
 
-                        OnPropertyChanged(nameof(WinnerName));
-                        OnPropertyChanged(nameof(WinPanelVisibility));
+                        UpdateWinStateProperties();
                     }
                     else if (status == TileStatus.Empty)
                     {
@@ -383,17 +373,8 @@ namespace Battleships.ViewModel.Page
             OnPropertyChanged(nameof(PlayElementsVisibility));
             OnPropertyChanged(nameof(NameIOVisibility));
 
-            OnPropertyChanged(nameof(Player1Model.Player.CarrierCount));
-            OnPropertyChanged(nameof(Player1Model.Player.BattleshipCount));
-            OnPropertyChanged(nameof(Player1Model.Player.SubmarineCount));
-            OnPropertyChanged(nameof(Player1Model.Player.CruiserCount));
-            OnPropertyChanged(nameof(Player1Model.Player.DestroyerCount));
-
-            OnPropertyChanged(nameof(Player2Model.Player.CarrierCount));
-            OnPropertyChanged(nameof(Player2Model.Player.BattleshipCount));
-            OnPropertyChanged(nameof(Player2Model.Player.SubmarineCount));
-            OnPropertyChanged(nameof(Player2Model.Player.CruiserCount));
-            OnPropertyChanged(nameof(Player2Model.Player.DestroyerCount));
+            UpdatePlayer1ShipProperties();
+            UpdatePlayer2ShipProperties();
 
             MatchResult = CreateGameResultInDatabase(Player1Model, Player2Model);
         }
@@ -458,6 +439,30 @@ namespace Battleships.ViewModel.Page
         private bool RegexMatch(string playerName)
         {
             return Regex.IsMatch(playerName, @"^[a-zA-Z0-9]+$");
+        }
+
+        private void UpdatePlayer1ShipProperties()
+        {
+            OnPropertyChanged("Player1Model.Player.CarrierCount");
+            OnPropertyChanged("Player1Model.Player.BattleshipCount");
+            OnPropertyChanged("Player1Model.Player.SubmarineCount");
+            OnPropertyChanged("Player1Model.Player.CruiserCount");
+            OnPropertyChanged("Player1Model.Player.DestroyerCount");
+        }
+
+        private void UpdatePlayer2ShipProperties()
+        {
+            OnPropertyChanged("Player2Model.Player.CarrierCount");
+            OnPropertyChanged("Player2Model.Player.BattleshipCount");
+            OnPropertyChanged("Player2Model.Player.SubmarineCount");
+            OnPropertyChanged("Player2Model.Player.CruiserCount");
+            OnPropertyChanged("Player2Model.Player.DestroyerCount");
+        }
+
+        private void UpdateWinStateProperties()
+        {
+            OnPropertyChanged(nameof(WinnerName));
+            OnPropertyChanged(nameof(WinPanelVisibility));
         }
     }
 }
