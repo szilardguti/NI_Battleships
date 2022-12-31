@@ -10,8 +10,6 @@ namespace Battleships.ViewModel.Command
         {
             get
             {
-                HistoryPageViewModel.Instance.LoadData();
-
                 return _navigateToHistoryPage;
             }
         }

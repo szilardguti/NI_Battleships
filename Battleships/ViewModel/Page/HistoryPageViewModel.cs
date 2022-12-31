@@ -25,6 +25,7 @@ namespace Battleships.ViewModel.Page
         private HistoryPageViewModel()
         {
             ResultRepository = new ResultRepository();
+            LoadData();
         }
 
         private ResultRepository ResultRepository { get; set; }

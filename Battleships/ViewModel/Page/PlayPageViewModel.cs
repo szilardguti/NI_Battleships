@@ -4,6 +4,8 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Battleships.DAL;
+using Battleships.DAL.Entities;
 using Battleships.Model;
 using Battleships.Model.Helpers;
 using Battleships.ViewModel.Command;
@@ -23,6 +25,7 @@ namespace Battleships.ViewModel.Page
             _showAIBoard = new CommandBase(ExecuteShowAIBoard);
             FirstPlayerTileItems = new ObservableCollection<TileItem>();
             SecondPlayerTileItems = new ObservableCollection<TileItem>();
+            ResultRepository = new ResultRepository();
             DrawPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
             DrawOtherPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
         }
@@ -140,6 +143,10 @@ namespace Battleships.ViewModel.Page
         private readonly PlayBoardModel _player1Model;
         private readonly PlayBoardModel _player2Model;
 
+        public GameResult MatchResult { get; set; }
+
+        private IResultRepository ResultRepository { get; set; }
+
         public PlayBoardModel Player1Model { get { return _player1Model; } }
         public PlayBoardModel Player2Model { get { return _player2Model; } }
 
@@ -236,6 +243,7 @@ namespace Battleships.ViewModel.Page
                     DrawOtherPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
                 }
             }
+            UpdateGameResultInDatabase(Player1Model, Player2Model);
         }
         public abstract void RobotPlay();
         public void DrawPlayBoardToCanvas(PlayBoardModel playBoard, ObservableCollection<TileItem> tileItems)
@@ -314,20 +322,69 @@ namespace Battleships.ViewModel.Page
 
             if (ReadyToPlay)
             {
-                Player1Model.Player.DestroyerCount = 1;
-                Player1Model.Player.SubmarineCount = 1;
-                Player1Model.Player.CarrierCount = 1;
-                Player1Model.Player.BattleshipCount = 1;
-                Player1Model.Player.CruiserCount = 1;
-                OnPropertyChanged(nameof(PlayElementsVisibility));
-                OnPropertyChanged(nameof(NameIOVisibility));
-
-                OnPropertyChanged(nameof(Player1Model.Player.CarrierCount));
-                OnPropertyChanged(nameof(Player1Model.Player.BattleshipCount));
-                OnPropertyChanged(nameof(Player1Model.Player.SubmarineCount));
-                OnPropertyChanged(nameof(Player1Model.Player.CruiserCount));
-                OnPropertyChanged(nameof(Player1Model.Player.DestroyerCount));
+                StartGame();
             }
+        }
+
+        private void StartGame()
+        {
+            Player1Model.Player.DestroyerCount = 1;
+            Player1Model.Player.SubmarineCount = 1;
+            Player1Model.Player.CarrierCount = 1;
+            Player1Model.Player.BattleshipCount = 1;
+            Player1Model.Player.CruiserCount = 1;
+
+            Player2Model.Player.DestroyerCount = 1;
+            Player2Model.Player.SubmarineCount = 1;
+            Player2Model.Player.CarrierCount = 1;
+            Player2Model.Player.BattleshipCount = 1;
+            Player2Model.Player.CruiserCount = 1;
+
+            OnPropertyChanged(nameof(PlayElementsVisibility));
+            OnPropertyChanged(nameof(NameIOVisibility));
+
+            OnPropertyChanged(nameof(Player1Model.Player.CarrierCount));
+            OnPropertyChanged(nameof(Player1Model.Player.BattleshipCount));
+            OnPropertyChanged(nameof(Player1Model.Player.SubmarineCount));
+            OnPropertyChanged(nameof(Player1Model.Player.CruiserCount));
+            OnPropertyChanged(nameof(Player1Model.Player.DestroyerCount));
+
+            OnPropertyChanged(nameof(Player2Model.Player.CarrierCount));
+            OnPropertyChanged(nameof(Player2Model.Player.BattleshipCount));
+            OnPropertyChanged(nameof(Player2Model.Player.SubmarineCount));
+            OnPropertyChanged(nameof(Player2Model.Player.CruiserCount));
+            OnPropertyChanged(nameof(Player2Model.Player.DestroyerCount));
+
+            MatchResult = CreateGameResultInDatabase(Player1Model, Player2Model);
+        }
+
+        private GameResult CreateGameResultInDatabase(PlayBoardModel player1Model, PlayBoardModel player2Model)
+        {
+            GameResult newGameResult = new GameResult()
+            {
+                FirstPlayerName = player1Model.Player.Name,
+                FirstPlayerHitCount = player1Model.Player.HitCount,
+                SecondPlayerName = player2Model.Player.Name,
+                SecondPlayerHitCount = player2Model.Player.HitCount,
+                RoundCount = Rounds,
+                IsInProgress = Winner == 0,
+                WinnerName = string.Empty
+            };
+
+            return ResultRepository.CreateGameResult(newGameResult);
+        }
+
+        private void UpdateGameResultInDatabase(PlayBoardModel player1Model, PlayBoardModel player2Model)
+        {
+            MatchResult.FirstPlayerName = player1Model.Player.Name;
+            MatchResult.FirstPlayerHitCount = player1Model.Player.HitCount;
+            MatchResult.SecondPlayerName = player2Model.Player.Name;
+            MatchResult.SecondPlayerHitCount = player2Model.Player.HitCount;
+            MatchResult.RoundCount = Rounds;
+            MatchResult.IsInProgress = Winner == 0;
+            MatchResult.WinnerName = string.Empty;
+
+            ResultRepository.UpdateGameResult(MatchResult);
         }
 
         public void ExecutePlayer2Submit(object parameter)
@@ -346,20 +403,7 @@ namespace Battleships.ViewModel.Page
 
             if (ReadyToPlay)
             {
-                Player2Model.Player.DestroyerCount = 1;
-                Player2Model.Player.SubmarineCount = 1;
-                Player2Model.Player.CarrierCount = 1;
-                Player2Model.Player.BattleshipCount = 1;
-                Player2Model.Player.CruiserCount = 1;
-
-                OnPropertyChanged(nameof(PlayElementsVisibility));
-                OnPropertyChanged(nameof(NameIOVisibility));
-
-                OnPropertyChanged(nameof(Player2Model.Player.CarrierCount));
-                OnPropertyChanged(nameof(Player2Model.Player.BattleshipCount));
-                OnPropertyChanged(nameof(Player2Model.Player.SubmarineCount));
-                OnPropertyChanged(nameof(Player2Model.Player.CruiserCount));
-                OnPropertyChanged(nameof(Player2Model.Player.DestroyerCount));
+                StartGame();
             }
         }
 
