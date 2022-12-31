@@ -21,8 +21,16 @@
             <ColumnDefinition Width="666*"/>
             <ColumnDefinition Width="43*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="95*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="1" FontSize="20" FontWeight="Bold"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                   >DOUBLE CLICK TO VIEW GAME HISTORY</TextBlock>
+        
         <ListView
-            Grid.Column="1"
+            Grid.Column="1" Grid.Row="1"
             ItemsSource="{Binding ListOfResults}"
             Name="ListView1"
             >
