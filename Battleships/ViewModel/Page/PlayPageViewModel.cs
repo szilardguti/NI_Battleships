@@ -29,7 +29,7 @@ namespace Battleships.ViewModel.Page
             FirstPlayerTileItems = new ObservableCollection<TileItem>();
             SecondPlayerTileItems = new ObservableCollection<TileItem>();
             ResultRepository = new ResultRepository();
-            TurnPanelVisibility = Visibility.Hidden;
+            UpdateTurnPanelProperties(false);
             DrawPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
             DrawOtherPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
         }
