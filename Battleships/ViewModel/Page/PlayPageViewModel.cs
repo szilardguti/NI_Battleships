@@ -87,6 +87,24 @@ namespace Battleships.ViewModel.Page
             }
         }
 
+        private bool _player1FormatError;
+        private bool _player2FormatError;
+
+        public Visibility Player1FormatErrorVisibility
+        {
+            get
+            {
+                return _player1FormatError ? Visibility.Visible : Visibility.Hidden;
+            }
+        }
+        public Visibility Player2FormatErrorVisibility
+        {
+            get
+            {
+                return _player2FormatError ? Visibility.Visible : Visibility.Hidden;
+            }
+        }
+
         private int _rounds = 1;
         public int Rounds { get { return _rounds; } set { _rounds = value; } }
 
@@ -285,7 +303,14 @@ namespace Battleships.ViewModel.Page
             if (RegexMatch(Player1Model.Player.Name))
             {
                 Player1Ready = true;
+                _player1FormatError = false;
             }
+            else
+            {
+                _player1FormatError = true;
+            }
+
+            OnPropertyChanged(nameof(Player1FormatErrorVisibility));
 
             if (ReadyToPlay)
             {
@@ -310,7 +335,14 @@ namespace Battleships.ViewModel.Page
             if (RegexMatch(Player2Model.Player.Name))
             {
                 Player2Ready = true;
+                _player2FormatError = false;
             }
+            else
+            {
+                _player2FormatError = true;
+            }
+
+            OnPropertyChanged(nameof(Player2FormatErrorVisibility));
 
             if (ReadyToPlay)
             {

@@ -198,25 +198,25 @@
 
         <StackPanel Grid.Column="1" Grid.Row="1" Background="Black" Width="2"/>
 
-        <TextBlock Grid.Column="0" Grid.Row="0"  
+        <TextBlock Grid.Column="0" Grid.Row="0" Visibility="{Binding PlayElementsVisibility}"
             Text="{Binding Player1Model.Player.Name}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <TextBlock Grid.Column="2" Grid.Row="0" 
+        <TextBlock Grid.Column="2" Grid.Row="0" Visibility="{Binding PlayElementsVisibility}"
             Text="{Binding Player2Model.Player.Name}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <TextBlock Grid.Column="1" Grid.Row="0" 
+        <TextBlock Grid.Column="1" Grid.Row="0" Visibility="{Binding PlayElementsVisibility}"
             Text="Round" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,24"/>
 
-        <TextBlock Grid.Column="1" Grid.Row="0" 
+        <TextBlock Grid.Column="1" Grid.Row="0" Visibility="{Binding PlayElementsVisibility}"
             Text="{Binding Rounds}" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,12,0,0"/>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" Foreground="#FFD21111"
+        <TextBlock Grid.Column="0" Grid.Row="0" Foreground="#FFD21111" Visibility="{Binding PlayElementsVisibility}"
             Text="{Binding Player1Model.Player.HitCount}" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20,0,20,0"/>
 
-        <TextBlock Grid.Column="2" Grid.Row="0" Foreground="#FFD21111"
+        <TextBlock Grid.Column="2" Grid.Row="0" Foreground="#FFD21111" Visibility="{Binding PlayElementsVisibility}"
             Text="{Binding Player2Model.Player.HitCount}" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,20,0"/>
 
-        <Grid Grid.Column="0" Grid.Row="2">
+        <Grid Grid.Column="0" Grid.Row="2" Visibility="{Binding PlayElementsVisibility}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="53*"/>
                 <ColumnDefinition Width="11*"/>
@@ -232,22 +232,22 @@
 
             <TextBlock FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Carrier:" Height="19" Width="44"/>
             <TextBlock Grid.Column="1" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Height="19" Width="7"
-                       Text="{Binding Path=Player1Model.Player.CarrierCount}" />
+                       Text="{Binding Path=Player1Model.Player.CarrierCount, Mode=TwoWay}" />
             <TextBlock Grid.Column="2" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="BattleShip:" Height="19" Width="66"/>
             <TextBlock Grid.Column="2" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="19" Margin="74,0,0,0" Width="8"
-                       Text="{Binding Path=Player1Model.Player.BattleshipCount}" />
+                       Text="{Binding Path=Player1Model.Player.BattleshipCount, Mode=TwoWay}" />
             <TextBlock Grid.Column="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Cruiser:" Height="19" Width="46"/>
             <TextBlock Grid.Column="4" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="19" Margin="53,0,0,0" Width="8"
-                       Text="{Binding Path=Player1Model.Player.CruiserCount}" />
+                       Text="{Binding Path=Player1Model.Player.CruiserCount, Mode=TwoWay}" />
             <TextBlock Grid.Column="6" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Submarine:" Height="19" Width="69"/>
             <TextBlock Grid.Column="7" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Height="19" Width="7"
-                       Text="{Binding Path=Player1Model.Player.SubmarineCount}"/>
+                       Text="{Binding Path=Player1Model.Player.SubmarineCount, Mode=TwoWay}"/>
             <TextBlock Grid.Column="8" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Destroyer:" Height="19" Width="63"/>
             <TextBlock Grid.Column="9" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Height="19" Width="8"
-                       Text="{Binding Path=Player1Model.Player.DestroyerCount}"/>
+                       Text="{Binding Path=Player1Model.Player.DestroyerCount, Mode=TwoWay}"/>
         </Grid>
 
-        <Button
+        <Button Visibility="{Binding PlayElementsVisibility}"
             Grid.Column="1" Grid.Row="2" Height="40"
             Command="{Binding NextPlayerCommand}">
             <Button.Resources>
@@ -284,7 +284,7 @@
                 ><Run Language="hu-hu" Text="Next"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
         </Button>
 
-        <Grid Grid.Column="2" Grid.Row="2">
+        <Grid Grid.Column="2" Grid.Row="2" Visibility="{Binding PlayElementsVisibility}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="53*"/>
                 <ColumnDefinition Width="11*"/>
@@ -300,19 +300,19 @@
 
             <TextBlock FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Carrier:" Height="19" Width="44"/>
             <TextBlock Grid.Column="1" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Height="19" Width="7"
-                       Text="{Binding Path=Player2Model.Player.CarrierCount}" />
+                       Text="{Binding Path=Player2Model.Player.CarrierCount, Mode=TwoWay}" />
             <TextBlock Grid.Column="2" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="BattleShip:" Height="19" Width="66"/>
             <TextBlock Grid.Column="2" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="19" Margin="74,0,0,0" Width="8"
-                       Text="{Binding Path=Player2Model.Player.BattleshipCount}" />
+                       Text="{Binding Path=Player2Model.Player.BattleshipCount, Mode=TwoWay}" />
             <TextBlock Grid.Column="4" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Cruiser:" Height="19" Width="46"/>
             <TextBlock Grid.Column="4" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="19" Margin="53,0,0,0" Width="8"
-                       Text="{Binding Path=Player2Model.Player.CruiserCount}" />
+                       Text="{Binding Path=Player2Model.Player.CruiserCount, Mode=TwoWay}" />
             <TextBlock Grid.Column="6" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Submarine:" Height="19" Width="69"/>
             <TextBlock Grid.Column="7" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Height="19" Width="7"
-                       Text="{Binding Path=Player2Model.Player.SubmarineCount}"/>
+                       Text="{Binding Path=Player2Model.Player.SubmarineCount, Mode=TwoWay}"/>
             <TextBlock Grid.Column="8" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Destroyer:" Height="19" Width="63"/>
             <TextBlock Grid.Column="9" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Height="19" Width="8"
-                       Text="{Binding Path=Player2Model.Player.DestroyerCount}"/>
+                       Text="{Binding Path=Player2Model.Player.DestroyerCount, Mode=TwoWay}"/>
         </Grid>
 
         <Grid Visibility="{Binding NameIOVisibility}">
@@ -426,5 +426,15 @@
                 Text="Ready"
                />
         </Button>
+
+        <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40"
+                   Text="Incorrect name format" FontSize="14" FontStyle="Italic" Foreground="Red"
+                   Visibility="{Binding Player1FormatErrorVisibility}"
+                   />
+
+        <TextBlock Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40"
+                   Text="Incorrect name format" FontSize="14" FontStyle="Italic" Foreground="Red"
+                   Visibility="{Binding Player2FormatErrorVisibility}"
+                   />
     </Grid>
 </Page>
