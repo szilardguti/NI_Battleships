@@ -229,6 +229,7 @@ namespace Battleships.ViewModel.Page
 
                         Player1Model.Player.HitCount += 1;
 
+                        UpdatePlayer1Properties();
                         UpdatePlayer2Properties();
 
                         UpdateWinStateProperties();
@@ -253,6 +254,7 @@ namespace Battleships.ViewModel.Page
                         Player2Model.Player.HitCount += 1;
 
                         UpdatePlayer1Properties();
+                        UpdatePlayer2Properties();
 
                         UpdateWinStateProperties();
                     }
