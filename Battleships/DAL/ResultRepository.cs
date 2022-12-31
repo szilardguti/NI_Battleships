@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Battleships.DAL.Entities;
+using Microsoft.VisualBasic;
 
 namespace Battleships.DAL
 {
@@ -35,7 +37,14 @@ namespace Battleships.DAL
         {
             using var context = new GameResultContext();
 
-            context.Actions.Add(gameAction);
+            GameResult parentResult = context.Results.FirstOrDefault(result => result.Id == gameAction.GameResult.Id);
+            if (parentResult == null)
+            {
+                return;
+            }
+            parentResult.Actions ??= new Collection<GameAction>();
+
+            parentResult.Actions.Add(gameAction);
             context.SaveChanges();
         }
 

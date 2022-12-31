@@ -218,6 +218,7 @@ namespace Battleships.ViewModel.Page
 
             if (CanShoot && Winner == 0)
             {
+                AddActionToDatabase(Player1Model, Player2Model, xIndex, yIndex);
                 if (CurrentPlayer == 1)
                 {
                     TileStatus status = Player2Model.GetTile(xIndex, yIndex).TileStatus;
@@ -381,7 +382,7 @@ namespace Battleships.ViewModel.Page
                 SecondPlayerHitCount = player2Model.Player.HitCount,
                 RoundCount = Rounds,
                 IsInProgress = Winner == 0,
-                WinnerName = string.Empty
+                WinnerName = string.Empty,
             };
 
             return ResultRepository.CreateGameResult(newGameResult);
@@ -395,9 +396,47 @@ namespace Battleships.ViewModel.Page
             MatchResult.SecondPlayerHitCount = player2Model.Player.HitCount;
             MatchResult.RoundCount = Rounds;
             MatchResult.IsInProgress = Winner == 0;
-            MatchResult.WinnerName = string.Empty;
+            if (!MatchResult.IsInProgress)
+            {
+                MatchResult.WinnerName = Winner == 1 ? MatchResult.FirstPlayerName : MatchResult.SecondPlayerName;
+            }
+            else
+            {
+                MatchResult.WinnerName = string.Empty;
+            }
 
             ResultRepository.UpdateGameResult(MatchResult);
+        }
+
+        private void AddActionToDatabase(PlayBoardModel player1Model, PlayBoardModel player2Model, int xIndex, int yIndex)
+        {
+            GameAction gameAction = new GameAction()
+            {
+                PlayerName = CurrentPlayer == 1 ? player1Model.Player.Name : player2Model.Player.Name,
+                FirstPlayerBoardStatus = player1Model.Tiles,
+                SecondPlayerBoardStatus = player2Model.Tiles,
+                FirstPlayerShips = player1Model.Ships,
+                SecondPlayerShips = player2Model.Ships,
+                GameResult = MatchResult,
+            };
+
+            string firstChar = xIndex switch
+            {
+                0 => "A",
+                1 => "B",
+                2 => "C",
+                3 => "D",
+                4 => "E",
+                5 => "F",
+                6 => "G",
+                7 => "H",
+                8 => "I",
+                9 => "J",
+                _ => "-",
+            };
+            gameAction.ActionString = string.Concat(firstChar, yIndex + 1);
+
+            ResultRepository.AddActionToGame(gameAction);
         }
 
         public void ExecutePlayer2Submit(object parameter)
