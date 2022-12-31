@@ -227,12 +227,8 @@ namespace Battleships.ViewModel.Page
                         Winner = winAndDestroy.Item1 ? 1 : 0;
 
                         Player1Model.Player.HitCount += 1;
-                        OnPropertyChanged("Player1Model.Player.HitCount");
 
-                        if (winAndDestroy.Item2)
-                        {
-                            UpdatePlayer2ShipProperties();
-                        }
+                        UpdatePlayer2Properties();
 
                         UpdateWinStateProperties();
                     }
@@ -254,12 +250,8 @@ namespace Battleships.ViewModel.Page
                         Winner = winAndDestroy.Item1 ? 2 : 0;
 
                         Player2Model.Player.HitCount += 1;
-                        OnPropertyChanged("Player2Model.Player.HitCount");
 
-                        if (winAndDestroy.Item2)
-                        {
-                            UpdatePlayer1ShipProperties();
-                        }
+                        UpdatePlayer1Properties();
 
                         UpdateWinStateProperties();
                     }
@@ -373,8 +365,8 @@ namespace Battleships.ViewModel.Page
             OnPropertyChanged(nameof(PlayElementsVisibility));
             OnPropertyChanged(nameof(NameIOVisibility));
 
-            UpdatePlayer1ShipProperties();
-            UpdatePlayer2ShipProperties();
+            UpdatePlayer1Properties();
+            UpdatePlayer2Properties();
 
             MatchResult = CreateGameResultInDatabase(Player1Model, Player2Model);
         }
@@ -441,22 +433,14 @@ namespace Battleships.ViewModel.Page
             return Regex.IsMatch(playerName, @"^[a-zA-Z0-9]+$");
         }
 
-        private void UpdatePlayer1ShipProperties()
+        private void UpdatePlayer1Properties()
         {
-            OnPropertyChanged("Player1Model.Player.CarrierCount");
-            OnPropertyChanged("Player1Model.Player.BattleshipCount");
-            OnPropertyChanged("Player1Model.Player.SubmarineCount");
-            OnPropertyChanged("Player1Model.Player.CruiserCount");
-            OnPropertyChanged("Player1Model.Player.DestroyerCount");
+            OnPropertyChanged(nameof(Player1Model));
         }
 
-        private void UpdatePlayer2ShipProperties()
+        private void UpdatePlayer2Properties()
         {
-            OnPropertyChanged("Player2Model.Player.CarrierCount");
-            OnPropertyChanged("Player2Model.Player.BattleshipCount");
-            OnPropertyChanged("Player2Model.Player.SubmarineCount");
-            OnPropertyChanged("Player2Model.Player.CruiserCount");
-            OnPropertyChanged("Player2Model.Player.DestroyerCount");
+            OnPropertyChanged(nameof(Player2Model));
         }
 
         private void UpdateWinStateProperties()
