@@ -26,6 +26,9 @@
         <DataTemplate DataType="{x:Type vmp:PlayAgainstPlayerViewModel}">
             <v:PlayerPlayerPage />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vmp:MatchHistoryPageViewModel}">
+            <v:MatchHistoryPage />
+        </DataTemplate>
     </Window.Resources>
     <Frame Content="{Binding CurrentPage}"/>
 

@@ -49,6 +49,8 @@ namespace Battleships.ViewModel.Page
             }
         }
 
+        public static GameResult PickedGameHistory { get; set; }
+
         private readonly ICommand _mouseDownCommand;
 
         public ICommand MouseDownCommand { get { return _mouseDownCommand; } }
@@ -62,14 +64,16 @@ namespace Battleships.ViewModel.Page
 
         private void NavigateToMatchHistoryWithId(object parameter)
         {
-            if (parameter is GameResult)
+            if (parameter is GameResult result)
             {
-                GameResult result = (GameResult)parameter;
-                Debug.WriteLine(result.FirstPlayerName);
+                // RESULT ?????????
+                PickedGameHistory = result;
 
                 MatchHistoryPageViewModel viewModel = new MatchHistoryPageViewModel();
-            }
 
+                NavigationCommand navigationCommand = new NavigationCommand(viewModel);
+                navigationCommand.Execute(viewModel);
+            }
         }
     }
 }
