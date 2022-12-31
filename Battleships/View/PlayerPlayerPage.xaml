@@ -462,5 +462,18 @@
                                Margin="0,0,130,0"
                                />
         </Grid>
+
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding TurnPanelVisibility}"
+              Background="Gray" Height="300" Width="500"
+              >
+            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center"
+                           Text="{Binding CurrentPlayerName}" Foreground="Black" FontSize="20"
+                           Margin="130,0,0,0"
+                           />
+            <TextBlock TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Center"
+                           Text="close your eyes!" Foreground="Black" FontSize="20"
+                           Margin="0,0,130,0"
+                           />
+        </Grid>
     </Grid>
 </Page>

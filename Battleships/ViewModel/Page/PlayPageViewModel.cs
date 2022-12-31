@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Media;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using Battleships.DAL;
@@ -26,6 +29,7 @@ namespace Battleships.ViewModel.Page
             FirstPlayerTileItems = new ObservableCollection<TileItem>();
             SecondPlayerTileItems = new ObservableCollection<TileItem>();
             ResultRepository = new ResultRepository();
+            TurnPanelVisibility = Visibility.Hidden;
             DrawPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
             DrawOtherPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
         }
@@ -188,6 +192,22 @@ namespace Battleships.ViewModel.Page
             }
         }
 
+        private Visibility _turnPanelVisibility;
+        public Visibility TurnPanelVisibility
+        {
+            get
+            {
+                return _turnPanelVisibility;
+            }
+
+            set
+            {
+                _turnPanelVisibility = value;
+            }
+        }
+
+        public string CurrentPlayerName { get; set; }
+
         public ObservableCollection<TileItem> FirstPlayerTileItems { get; set; }
         public ObservableCollection<TileItem> SecondPlayerTileItems { get; set; }
 
@@ -207,10 +227,16 @@ namespace Battleships.ViewModel.Page
         public PlayBoardModel Player1Model { get { return _player1Model; } }
         public PlayBoardModel Player2Model { get { return _player2Model; } }
 
-        public void NextPlayer(object parameter)
+        public async void NextPlayer(object parameter)
         {
             if (!CanShoot)
             {
+                UpdateTurnPanelProperties(true);
+                await Task.Delay(2000);
+                UpdateTurnPanelProperties(false);
+
+                SystemSounds.Beep.Play();
+
                 if (CurrentPlayer == 1)
                 {
                     DrawPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
@@ -538,6 +564,22 @@ namespace Battleships.ViewModel.Page
         {
             OnPropertyChanged(nameof(WinnerName));
             OnPropertyChanged(nameof(WinPanelVisibility));
+        }
+
+        protected void UpdateTurnPanelProperties(bool isShowing)
+        {
+            if (CurrentPlayer != 2 && Player2Model.Player.IsARobot)
+            {
+                return;
+            }
+
+            var currentPlayerName = CurrentPlayer != 1 ? Player1Model.Player.Name : Player2Model.Player.Name;
+            CurrentPlayerName = currentPlayerName;
+
+            TurnPanelVisibility = isShowing ? Visibility.Visible : Visibility.Hidden;
+
+            OnPropertyChanged(nameof(CurrentPlayerName));
+            OnPropertyChanged(nameof(TurnPanelVisibility));
         }
     }
 }
