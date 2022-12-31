@@ -241,9 +241,10 @@ namespace Battleships.ViewModel.Page
             int xIndex = (int)point.X / 30;
             int yIndex = (int)point.Y / 30;
 
+            int shootingPlayer = CurrentPlayer;
+
             if (CanShoot && Winner == 0)
             {
-                AddActionToDatabase(Player1Model, Player2Model, xIndex, yIndex);
                 if (CurrentPlayer == 1)
                 {
                     TileStatus status = Player2Model.GetTile(xIndex, yIndex).TileStatus;
@@ -298,6 +299,7 @@ namespace Battleships.ViewModel.Page
                     DrawOtherPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
                 }
             }
+            AddActionToDatabase(Player1Model, Player2Model, xIndex, yIndex, shootingPlayer);
             UpdateGameResultInDatabase(Player1Model, Player2Model);
         }
         public abstract void RobotPlay();
@@ -420,6 +422,8 @@ namespace Battleships.ViewModel.Page
             OnPropertyChanged(nameof(PlayElementsVisibility));
             OnPropertyChanged(nameof(NameIOVisibility));
 
+            MatchResult = CreateGameResultInDatabase(Player1Model, Player2Model);
+
             CurrentPlayer = new Random().Next(0, 2) == 0 ? 1 : 2;
             StartingPlayer = CurrentPlayer;
             if (CurrentPlayer == 2 && Player2Model.Player.IsARobot)
@@ -432,8 +436,6 @@ namespace Battleships.ViewModel.Page
 
             OnPropertyChanged(nameof(Player1ReadyVisibility));
             OnPropertyChanged(nameof(Player2ReadyVisibility));
-
-            MatchResult = CreateGameResultInDatabase(Player1Model, Player2Model);
         }
 
         private GameResult CreateGameResultInDatabase(PlayBoardModel player1Model, PlayBoardModel player2Model)
@@ -472,11 +474,11 @@ namespace Battleships.ViewModel.Page
             ResultRepository.UpdateGameResult(MatchResult);
         }
 
-        private void AddActionToDatabase(PlayBoardModel player1Model, PlayBoardModel player2Model, int xIndex, int yIndex)
+        protected void AddActionToDatabase(PlayBoardModel player1Model, PlayBoardModel player2Model, int xIndex, int yIndex, int shootingPlayer)
         {
             GameAction gameAction = new GameAction()
             {
-                PlayerName = CurrentPlayer == 1 ? player1Model.Player.Name : player2Model.Player.Name,
+                PlayerName = shootingPlayer == 1 ? player1Model.Player.Name : player2Model.Player.Name,
                 FirstPlayerBoardStatus = player1Model.Tiles,
                 SecondPlayerBoardStatus = player2Model.Tiles,
                 FirstPlayerShips = player1Model.Ships,

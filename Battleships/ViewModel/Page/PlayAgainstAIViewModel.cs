@@ -52,6 +52,7 @@ namespace Battleships.ViewModel.Page
                     CanShoot = false;
                 }
 
+                AddActionToDatabase(Player1Model, Player2Model, tile.X, tile.Y, 2);
                 DrawOtherPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
             }
             while (CanShoot);
