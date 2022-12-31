@@ -15,7 +15,7 @@
         <vmp:PlayAgainstPlayerViewModel/>
     </Page.DataContext>
     <Grid>
-        <Grid ShowGridLines="True">
+        <Grid ShowGridLines="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="7*"/>
                 <ColumnDefinition/>
@@ -27,7 +27,7 @@
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Column="0" Grid.Row="1" ShowGridLines="True" Visibility="{Binding PlayElementsVisibility}">
+            <Grid Grid.Column="0" Grid.Row="1" ShowGridLines="False" Visibility="{Binding PlayElementsVisibility}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="300"/>
@@ -112,7 +112,7 @@
                 </ItemsControl>
             </Grid>
 
-            <Grid Grid.Column="2" Grid.Row="1" ShowGridLines="True" Visibility="{Binding PlayElementsVisibility}">
+            <Grid Grid.Column="2" Grid.Row="1" ShowGridLines="False" Visibility="{Binding PlayElementsVisibility}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="300"/>
                     <ColumnDefinition />
@@ -200,10 +200,10 @@
             <StackPanel Grid.Column="1" Grid.Row="1" Background="Black" Width="2"/>
 
             <TextBlock Grid.Column="0" Grid.Row="0" Visibility="{Binding PlayElementsVisibility}"
-                Text="{Binding Player1Model.Player.Name}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                Text="{Binding Player1Model.Player.Name}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{Binding FirstPlayerNameBackgroundColor}"/>
 
             <TextBlock Grid.Column="2" Grid.Row="0" Visibility="{Binding PlayElementsVisibility}"
-                Text="{Binding Player2Model.Player.Name}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                Text="{Binding Player2Model.Player.Name}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{Binding SecondPlayerNameBackgroundColor}"/>
 
             <TextBlock Grid.Column="1" Grid.Row="0" Visibility="{Binding PlayElementsVisibility}"
                 Text="Round" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,24"/>
@@ -282,7 +282,7 @@
                     TextWrapping="WrapWithOverflow"
                     TextAlignment="Center" 
                     Foreground="White" RenderTransformOrigin="0.4,1.152"
-                    ><Run Language="hu-hu" Text="Next"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+                    ><Run Language="hu-hu" Text="Next"/><Run Language="hu-hu"/></TextBlock>
             </Button>
 
             <Grid Grid.Column="2" Grid.Row="2" Visibility="{Binding PlayElementsVisibility}">
@@ -332,7 +332,7 @@
                          Height="18"
                          Margin="5,0,40,0"
                          Text="{Binding Path=Player1Model.Player.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         />
+                    />
             </Grid>
 
             <Grid Visibility="{Binding NameIOVisibility}" Grid.Column="2">

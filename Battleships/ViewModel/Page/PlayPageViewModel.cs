@@ -30,8 +30,6 @@ namespace Battleships.ViewModel.Page
             SecondPlayerTileItems = new ObservableCollection<TileItem>();
             ResultRepository = new ResultRepository();
             UpdateTurnPanelProperties(false);
-            DrawPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
-            DrawOtherPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
         }
 
         private bool _player1Ready;
@@ -192,6 +190,12 @@ namespace Battleships.ViewModel.Page
             }
         }
 
+        private SolidColorBrush _firstPlayerNameBackgroundColor;
+        private SolidColorBrush _secondPlayerNameBackgroundColor;
+
+        public SolidColorBrush FirstPlayerNameBackgroundColor { get => _firstPlayerNameBackgroundColor; set => _firstPlayerNameBackgroundColor = value; }
+        public SolidColorBrush SecondPlayerNameBackgroundColor { get => _secondPlayerNameBackgroundColor; set => _secondPlayerNameBackgroundColor = value; }
+
         private Visibility _turnPanelVisibility;
         public Visibility TurnPanelVisibility
         {
@@ -234,6 +238,7 @@ namespace Battleships.ViewModel.Page
                 UpdateTurnPanelProperties(true);
                 await Task.Delay(2000);
                 UpdateTurnPanelProperties(false);
+                SetNameBackgroundToCurrentPlayer();
 
                 SystemSounds.Beep.Play();
 
@@ -457,8 +462,21 @@ namespace Battleships.ViewModel.Page
                 RobotPlay();
             }
 
+            if (StartingPlayer == 1)
+            {
+                DrawPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
+                DrawOtherPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
+            }
+            else
+            {
+                DrawPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
+                DrawOtherPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
+            }
+
             UpdatePlayer1Properties();
             UpdatePlayer2Properties();
+
+            SetNameBackgroundToCurrentPlayer();
 
             OnPropertyChanged(nameof(Player1ReadyVisibility));
             OnPropertyChanged(nameof(Player2ReadyVisibility));
@@ -580,6 +598,23 @@ namespace Battleships.ViewModel.Page
 
             OnPropertyChanged(nameof(CurrentPlayerName));
             OnPropertyChanged(nameof(TurnPanelVisibility));
+        }
+
+        private void SetNameBackgroundToCurrentPlayer()
+        {
+            if (CurrentPlayer == 1)
+            {
+                FirstPlayerNameBackgroundColor = Brushes.LightBlue;
+                SecondPlayerNameBackgroundColor = Brushes.White;
+            }
+            else
+            {
+                FirstPlayerNameBackgroundColor = Brushes.White;
+                SecondPlayerNameBackgroundColor = Brushes.LightBlue;
+            }
+
+            OnPropertyChanged(nameof(FirstPlayerNameBackgroundColor));
+            OnPropertyChanged(nameof(SecondPlayerNameBackgroundColor));
         }
     }
 }
