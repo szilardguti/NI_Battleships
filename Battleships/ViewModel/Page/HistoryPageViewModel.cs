@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Windows.Input;
 using Battleships.DAL;
 using Battleships.DAL.Entities;
+using Battleships.ViewModel.Command;
 
 namespace Battleships.ViewModel.Page
 {
@@ -19,8 +23,9 @@ namespace Battleships.ViewModel.Page
             }
         }
 
-        private HistoryPageViewModel()
+        public HistoryPageViewModel()
         {
+            _mouseDownCommand = new CommandBase(NavigateToMatchHistoryWithId);
             ResultRepository = new ResultRepository();
             LoadData();
         }
@@ -44,11 +49,27 @@ namespace Battleships.ViewModel.Page
             }
         }
 
+        private readonly ICommand _mouseDownCommand;
+
+        public ICommand MouseDownCommand { get { return _mouseDownCommand; } }
+
         public void LoadData()
         {
             ListOfResults = ResultRepository.GetAllGames();
 
             OnPropertyChanged(nameof(ListOfResults));
+        }
+
+        private void NavigateToMatchHistoryWithId(object parameter)
+        {
+            if (parameter is GameResult)
+            {
+                GameResult result = (GameResult)parameter;
+                Debug.WriteLine(result.FirstPlayerName);
+
+                MatchHistoryPageViewModel viewModel = new MatchHistoryPageViewModel();
+            }
+
         }
     }
 }

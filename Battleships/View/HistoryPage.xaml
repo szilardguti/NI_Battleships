@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Battleships.View"
       xmlns:vmp="clr-namespace:Battleships.ViewModel.Page"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HistoryPage">
@@ -23,6 +24,7 @@
         <ListView
             Grid.Column="1"
             ItemsSource="{Binding ListOfResults}"
+            Name="ListView1"
             >
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -86,7 +88,13 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseDown">
+                    <i:InvokeCommandAction Command="{Binding MouseDownCommand}" 
+                                           CommandParameter="{Binding ElementName=ListView1, Path=SelectedItem}"
+                                           PassEventArgsToCommand="True"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListView>
 
     </Grid>
