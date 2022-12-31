@@ -38,7 +38,7 @@ namespace Battleships.ViewModel.Page
             FirstPlayerTileItems = new ObservableCollection<TileItem>();
             SecondPlayerTileItems = new ObservableCollection<TileItem>();
 
-            SetupLastActionStatus();
+            ShowAction(GameActions.Last());
         }
 
         private void SetupPlayerModels()
@@ -52,12 +52,10 @@ namespace Battleships.ViewModel.Page
             UpdatePlayerProperties();
         }
 
-        private void SetupLastActionStatus()
+        private void ShowAction(GameAction action)
         {
-            GameAction lastAction = GameActions.Last();
-
-            Player1Model.Tiles = new Collection<Tile>(lastAction.FirstPlayerBoardStatus.ToList());
-            Player2Model.Tiles = new Collection<Tile>(lastAction.SecondPlayerBoardStatus.ToList());
+            Player1Model.Tiles = new Collection<Tile>(action.FirstPlayerBoardStatus.ToList());
+            Player2Model.Tiles = new Collection<Tile>(action.SecondPlayerBoardStatus.ToList());
 
             DrawPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
             DrawPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);

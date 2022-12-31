@@ -66,7 +66,6 @@ namespace Battleships.ViewModel.Page
         {
             if (parameter is GameResult result)
             {
-                // RESULT ?????????
                 PickedGameHistory = result;
 
                 MatchHistoryPageViewModel viewModel = new MatchHistoryPageViewModel();
