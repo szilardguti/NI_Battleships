@@ -8,8 +8,6 @@ namespace Battleships.ViewModel.Page
 {
     public class PlayAgainstPlayerViewModel : PlayPageViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public PlayAgainstPlayerViewModel()
         {
             Player1Model.Player.Name = string.Empty;
