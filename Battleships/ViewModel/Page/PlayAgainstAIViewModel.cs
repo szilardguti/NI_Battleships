@@ -31,7 +31,7 @@ namespace Battleships.ViewModel.Page
                 if (status == TileStatus.Ship)
                 {
                     Tuple<bool, bool> winAndDestroy = Player1Model.Hit(tile.X, tile.Y);
-                    Winner = winAndDestroy.Item1 ? 1 : 0;
+                    Winner = winAndDestroy.Item1 ? 2 : 0;
 
                     Player2Model.Player.HitCount += 1;
                     OnPropertyChanged(nameof(Player2Model.Player.HitCount));
