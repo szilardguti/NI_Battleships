@@ -109,6 +109,21 @@ namespace Battleships.ViewModel.Page
             }
         }
 
+        public Visibility Player1ReadyVisibility
+        {
+            get
+            {
+                return (_player1Ready && !_readyToPlay) ? Visibility.Visible : Visibility.Hidden;
+            }
+        }
+        public Visibility Player2ReadyVisibility
+        {
+            get
+            {
+                return (_player2Ready && !_readyToPlay) ? Visibility.Visible : Visibility.Hidden;
+            }
+        }
+
         private int _rounds = 1;
         public int Rounds { get { return _rounds; } set { _rounds = value; } }
 
@@ -344,12 +359,34 @@ namespace Battleships.ViewModel.Page
                 _player1FormatError = true;
             }
 
+            if (ReadyToPlay)
+            {
+                StartGame();
+            }
+
+            OnPropertyChanged(nameof(Player1ReadyVisibility));
             OnPropertyChanged(nameof(Player1FormatErrorVisibility));
+        }
+
+        public void ExecutePlayer2Submit(object parameter)
+        {
+            if (RegexMatch(Player2Model.Player.Name))
+            {
+                Player2Ready = true;
+                _player2FormatError = false;
+            }
+            else
+            {
+                _player2FormatError = true;
+            }
 
             if (ReadyToPlay)
             {
                 StartGame();
             }
+
+            OnPropertyChanged(nameof(Player2ReadyVisibility));
+            OnPropertyChanged(nameof(Player2FormatErrorVisibility));
         }
 
         private void StartGame()
@@ -371,6 +408,9 @@ namespace Battleships.ViewModel.Page
 
             UpdatePlayer1Properties();
             UpdatePlayer2Properties();
+
+            OnPropertyChanged(nameof(Player1ReadyVisibility));
+            OnPropertyChanged(nameof(Player2ReadyVisibility));
 
             MatchResult = CreateGameResultInDatabase(Player1Model, Player2Model);
         }
@@ -440,26 +480,6 @@ namespace Battleships.ViewModel.Page
             gameAction.ActionString = string.Concat(firstChar, yIndex + 1);
 
             ResultRepository.AddActionToGame(gameAction);
-        }
-
-        public void ExecutePlayer2Submit(object parameter)
-        {
-            if (RegexMatch(Player2Model.Player.Name))
-            {
-                Player2Ready = true;
-                _player2FormatError = false;
-            }
-            else
-            {
-                _player2FormatError = true;
-            }
-
-            OnPropertyChanged(nameof(Player2FormatErrorVisibility));
-
-            if (ReadyToPlay)
-            {
-                StartGame();
-            }
         }
 
         public void ExecuteShowAIBoard(object parameter)

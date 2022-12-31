@@ -438,7 +438,17 @@
                        Visibility="{Binding Player2FormatErrorVisibility}"
                        />
 
-        
+            <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40"
+                   Text="Player 1 Ready" FontSize="14" FontStyle="Italic" Foreground="LimeGreen"
+                   Visibility="{Binding Player1ReadyVisibility}"
+                   />
+
+            <TextBlock Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40"
+                   Text="Player 2 Ready" FontSize="14" FontStyle="Italic" Foreground="LimeGreen"
+                   Visibility="{Binding Player2ReadyVisibility}"
+                   />
+
+
         </Grid>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding WinPanelVisibility}"
                   Background="Black" Height="300" Width="500"
