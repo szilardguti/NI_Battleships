@@ -6,10 +6,7 @@ namespace Battleships.ViewModel.Page
 {
     public class MainPageViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private static MainPageViewModel _instance;
-
         public static MainPageViewModel Instance
         {
             get

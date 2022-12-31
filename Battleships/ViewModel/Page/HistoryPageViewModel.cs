@@ -8,10 +8,7 @@ namespace Battleships.ViewModel.Page
 {
     public class HistoryPageViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private static HistoryPageViewModel _instance;
-
         public static HistoryPageViewModel Instance
         {
             get
