@@ -131,6 +131,40 @@ namespace Battleships.ViewModel.Page
             set { _canShoot = value; }
         }
 
+        public string WinnerName
+        {
+            get
+            {
+                string winnerName = string.Empty;
+
+                switch (Winner)
+                {
+                    case 1:
+                        winnerName = Player1Model.Player.Name;
+                        break;
+                    case 2:
+                        winnerName = Player2Model.Player.Name;
+                        break;
+                    case 0: 
+                        return winnerName;
+                }
+
+                return winnerName;
+            }
+        }
+
+        public Visibility WinPanelVisibility
+        {
+            get
+            {
+                switch (Winner)
+                {
+                    case 1: case 2: return Visibility.Visible;
+                    default: return Visibility.Hidden;
+                }
+            }
+        }
+
         public ObservableCollection<TileItem> FirstPlayerTileItems { get; set; }
         public ObservableCollection<TileItem> SecondPlayerTileItems { get; set; }
 
@@ -203,6 +237,9 @@ namespace Battleships.ViewModel.Page
                             OnPropertyChanged(nameof(Player2Model.Player.BattleshipCount));
                             OnPropertyChanged(nameof(Player2Model.Player.CruiserCount));
                         }
+
+                        OnPropertyChanged(nameof(WinnerName));
+                        OnPropertyChanged(nameof(WinPanelVisibility));
                     }
                     else if (status == TileStatus.Empty)
                     {
@@ -219,7 +256,7 @@ namespace Battleships.ViewModel.Page
                     if (status == TileStatus.Ship)
                     {
                         Tuple<bool, bool> winAndDestroy = Player1Model.Hit(xIndex, yIndex);
-                        Winner = winAndDestroy.Item1 ? 1 : 0;
+                        Winner = winAndDestroy.Item1 ? 2 : 0;
 
                         Player2Model.Player.HitCount += 1;
                         OnPropertyChanged(nameof(Player2Model.Player.HitCount));
@@ -232,6 +269,9 @@ namespace Battleships.ViewModel.Page
                             OnPropertyChanged(nameof(Player1Model.Player.CruiserCount));
                             OnPropertyChanged(nameof(Player1Model.Player.DestroyerCount));
                         }
+
+                        OnPropertyChanged(nameof(WinnerName));
+                        OnPropertyChanged(nameof(WinPanelVisibility));
                     }
                     else if (status == TileStatus.Empty)
                     {
