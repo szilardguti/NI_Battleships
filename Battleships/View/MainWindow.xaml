@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Battleships"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="\ BATTLESHIPS /" Height="600" Width="1000"
         xmlns:v="clr-namespace:Battleships.View"
         xmlns:vm="clr-namespace:Battleships.ViewModel"
         xmlns:vmp="clr-namespace:Battleships.ViewModel.Page"
