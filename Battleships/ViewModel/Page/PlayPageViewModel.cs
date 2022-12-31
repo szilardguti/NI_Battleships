@@ -115,6 +115,7 @@ namespace Battleships.ViewModel.Page
         private int _winner = 0;
         private int _currentPlayer = 1;
         private bool _canShoot = true;
+        private int _startingPlayer = 1;
         public int Winner
         {
             get { return _winner; }
@@ -124,6 +125,12 @@ namespace Battleships.ViewModel.Page
         {
             get { return _currentPlayer; }
             set { _currentPlayer = value; }
+        }
+
+        public int StartingPlayer
+        {
+            get { return _startingPlayer; }
+            set { _startingPlayer = value; }
         }
 
         public bool CanShoot
@@ -193,14 +200,16 @@ namespace Battleships.ViewModel.Page
                 {
                     DrawPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
                     DrawOtherPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
-                    Rounds += 1;
-                    OnPropertyChanged(nameof(Rounds));
+                    if (StartingPlayer == 1)
+                    {
+                        Rounds++;
+                        OnPropertyChanged(nameof(Rounds));
+                    }
                 }
                 else
                 {
                     DrawPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
                     DrawOtherPlayBoardToCanvas(Player1Model, FirstPlayerTileItems);
-
                     if (Player2Model.Player.IsARobot)
                     {
                         RobotPlay();
@@ -239,6 +248,11 @@ namespace Battleships.ViewModel.Page
                     {
                         Player2Model.Miss(xIndex, yIndex);
                         CurrentPlayer = 2;
+                        if (StartingPlayer == 2)
+                        {
+                            Rounds++;
+                            OnPropertyChanged(nameof(Rounds));
+                        }
                         CanShoot = false;
                     }
 
@@ -368,6 +382,13 @@ namespace Battleships.ViewModel.Page
 
             OnPropertyChanged(nameof(PlayElementsVisibility));
             OnPropertyChanged(nameof(NameIOVisibility));
+
+            CurrentPlayer = new Random().Next(0, 2) == 0 ? 1 : 2;
+            StartingPlayer = CurrentPlayer;
+            if (CurrentPlayer == 2 && Player2Model.Player.IsARobot)
+            {
+                RobotPlay();
+            }
 
             UpdatePlayer1Properties();
             UpdatePlayer2Properties();
