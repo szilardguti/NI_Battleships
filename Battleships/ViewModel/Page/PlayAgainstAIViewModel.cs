@@ -58,13 +58,5 @@ namespace Battleships.ViewModel.Page
 
             NextPlayer(null);
         }
-
-        public void OnCombination(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.K)
-            {
-                e.Handled = true;
-            }
-        }
     }
 }

@@ -32,6 +32,7 @@ namespace Battleships.ViewModel.Page
 
         private bool _player1Ready;
         private bool _player2Ready;
+        private bool _aiShowing = false;
 
         public bool Player1Ready
         {
@@ -461,9 +462,15 @@ namespace Battleships.ViewModel.Page
 
         public void ExecuteShowAIBoard(object parameter)
         {
-            if (CurrentPlayer == 1)
+            if (CurrentPlayer == 1 && !_aiShowing)
             {
                 DrawPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
+                _aiShowing = true;
+            }
+            else if (CurrentPlayer == 1 && _aiShowing)
+            {
+                DrawOtherPlayBoardToCanvas(Player2Model, SecondPlayerTileItems);
+                _aiShowing = false;
             }
         }
 
