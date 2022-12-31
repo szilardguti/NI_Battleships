@@ -21,11 +21,6 @@ namespace Battleships.Model
             PlaceShips();
 
             Player = new PlayerModel();
-            /*Player.CarrierCount = 1;
-            Player.CruiserCount = 1;
-            Player.SubmarineCount = 1;
-            Player.DestroyerCount = 1;
-            Player.BattleshipCount = 1;*/
         }
 
         public Tile GetTile(int rowIndex, int colIndex)
